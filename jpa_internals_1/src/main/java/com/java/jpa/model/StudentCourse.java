@@ -5,11 +5,11 @@ import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Builder
 public class StudentCourse implements Serializable {
 	private static final long serialVersionUID = 6966584934030489819L;
@@ -22,7 +22,7 @@ public class StudentCourse implements Serializable {
 	private String address;
 	private long mobileNumber;
 	private byte age;
-	private boolean isStudent;
+	private boolean student;
 	private int courseRegisteredIn;
 
 	private String coursename;

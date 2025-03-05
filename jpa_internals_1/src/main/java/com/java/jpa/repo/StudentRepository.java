@@ -6,4 +6,6 @@ import com.java.jpa.entity.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
+	Student findByRollno(String rollno);
+
 }

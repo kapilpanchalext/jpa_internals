@@ -1,15 +1,24 @@
 package com.java.jpa.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -44,4 +53,14 @@ public class Student extends BaseData implements Serializable {
 	
 	@Column(name = "courseRegisteredIn")
 	private int courseRegisteredIn;
+	
+	@EqualsAndHashCode.Exclude
+	@Builder.Default
+	@ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "student_course", 
+        joinColumns = @JoinColumn(name = "student_rollno"), 
+        inverseJoinColumns = @JoinColumn(name = "course_no")
+    ) 
+    private Set<Course> courses = new HashSet<>();
 }

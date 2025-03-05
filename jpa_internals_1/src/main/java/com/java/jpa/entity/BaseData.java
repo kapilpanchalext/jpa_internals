@@ -25,14 +25,14 @@ public class BaseData implements Serializable {
 	private long id;
 	
 	@Column(name = "createdBy")
-	private String createdBy;
+	private String createdBy = "admin";
 	
 	@Column(name = "createdAt")
-	private LocalDateTime createdAt;
+	private LocalDateTime createdAt = LocalDateTime.now();
 	
 	@Column(name = "modifiedBy")
-	private String modifiedBy;
+	private String modifiedBy = "admin";
 	
 	@Column(name = "modifiedOn")
-	private LocalDateTime modifiedOn;
+	private LocalDateTime modifiedOn = LocalDateTime.now();
 }

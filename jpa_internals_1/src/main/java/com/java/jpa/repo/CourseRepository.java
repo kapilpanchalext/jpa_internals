@@ -6,4 +6,6 @@ import com.java.jpa.entity.Course;
 
 public interface CourseRepository extends JpaRepository<Course, Long>{
 
+	Course findByCourseno(String courseno);
+
 }
