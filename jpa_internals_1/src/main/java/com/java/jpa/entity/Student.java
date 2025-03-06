@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -29,31 +32,31 @@ import lombok.ToString;
 @Builder
 public class Student extends BaseData implements Serializable {
 	private static final long serialVersionUID = 339912208386100188L;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "rollno", unique = true)
 	private String rollno;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "firstname")
 	private String firstname;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "lastname")
 	private String lastname;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "address")
 	private String address;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "mobileNumber")
 	private long mobileNumber;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "age")
 	private byte age;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "isStudent")
 	private boolean isStudent;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "courseRegisteredIn")
 	private int courseRegisteredIn;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@EqualsAndHashCode.Exclude
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)

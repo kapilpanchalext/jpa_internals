@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,22 +29,22 @@ import lombok.RequiredArgsConstructor;
 @Builder
 public class Course extends BaseData implements Serializable {
 	private static final long serialVersionUID = -331452226800855670L;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "courseno", unique = true)
 	private String courseno;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "coursename")
 	private String coursename;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "subject")
 	private String subject;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "course_type")
 	private String courseType;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@Column(name = "location")
 	private boolean location;
-	
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	@EqualsAndHashCode.Exclude
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)

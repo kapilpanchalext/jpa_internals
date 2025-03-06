@@ -3,6 +3,9 @@ package com.java.jpa.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
