@@ -99,7 +99,7 @@ public class StudentServiceImpl implements StudentService {
         System.err.println(students);
 
         for (Student student : students) {
-            if (student.getCourses().isEmpty()) continue; // Skip students without courses
+            if (student.getCourses().isEmpty()) continue;
 
             for (Course course : student.getCourses()) {
                 if (course.getSubjects().isEmpty()) {
