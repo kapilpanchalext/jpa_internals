@@ -1,6 +1,7 @@
 package com.java.jpa.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,8 +11,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -34,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 public class Student extends BaseData implements Serializable {
 	private static final long serialVersionUID = 339912208386100188L;
 	
-	@Column(name = "rollno", unique = true)
+	@Column(name = "rollno", unique = true, updatable = false)
 	private String rollno;
 	
 	@Column(name = "firstname")
@@ -43,20 +44,24 @@ public class Student extends BaseData implements Serializable {
 	@Column(name = "lastname")
 	private String lastname;
 	
+	@Enumerated
+	@Column(name = "gender")
+	private Gender gender;
+	
 	@Column(name = "address")
 	private String address;
 	
-	@Column(name = "mobileNumber")
+	@Column(name = "mobileno")
 	private long mobileNumber;
 	
 	@Column(name = "age")
 	private byte age;
 	
+	@Column(name = "joiningdate")
+	private LocalDate joiningDate;
+	
 	@Column(name = "isStudent")
 	private boolean isStudent;
-	
-	@Column(name = "courseRegisteredIn")
-	private int courseRegisteredIn;
 	
 	@EqualsAndHashCode.Exclude
 	@Builder.Default
