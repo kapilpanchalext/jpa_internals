@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student findStudentById(String rollno) {
-		return studentRepository.findById(Long.valueOf(rollno)).get();
+		return null;
 	}
 
 	@Override
@@ -96,8 +96,6 @@ public class StudentServiceImpl implements StudentService {
 		List<StudentCourseSubject> result = new ArrayList<>();
         List<Student> students = studentRepository.findAll();
         
-        System.err.println(students);
-
         for (Student student : students) {
             if (student.getCourses().isEmpty()) continue;
 
@@ -137,7 +135,12 @@ public class StudentServiceImpl implements StudentService {
                 }
             }
         }
-        System.err.println(result.size());
         return result;
+	}
+
+	@Override
+	public List<StudentCourseSubject> getStudentsListBySubject(String subject) {
+		List<Student> studentsListBySubject = studentRepository.findAllById(null);
+		return null;
 	}
 }

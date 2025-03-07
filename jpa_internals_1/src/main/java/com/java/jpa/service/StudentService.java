@@ -33,4 +33,6 @@ public interface StudentService {
 
 	List<StudentCourseSubject> getStudentCourseSubjectMappings();
 
+	List<StudentCourseSubject> getStudentsListBySubject(String subject);
+
 }

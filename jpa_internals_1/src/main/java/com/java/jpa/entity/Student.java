@@ -44,6 +44,9 @@ public class Student extends BaseData implements Serializable {
 	@Column(name = "lastname")
 	private String lastname;
 	
+	@Column(name = "dob")
+	private LocalDate dob;
+	
 	@Enumerated
 	@Column(name = "gender")
 	private Gender gender;

@@ -121,8 +121,16 @@ public class StudentCourseController {
 		return ResponseEntity.status(HttpStatus.OK).body(savedCourse);
 	}
 	
-	@GetMapping("/courses-subjects")
+	@GetMapping(path = "/courses-subjects")
     public List<StudentCourseSubject> getStudentCourseSubjectMappings() {
         return service.getStudentCourseSubjectMappings();
     }
+	
+	@GetMapping(path = "/list-students-by-subject")
+	public ResponseEntity<List<StudentCourseSubject>> getStudentsListBySubject(@RequestParam String subject) {
+		
+		List<StudentCourseSubject> studentsListBySubject = service.getStudentsListBySubject(subject);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(studentsListBySubject);
+	}
 }

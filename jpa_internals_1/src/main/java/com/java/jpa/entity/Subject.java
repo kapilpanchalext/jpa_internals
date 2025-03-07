@@ -24,7 +24,7 @@ public class Subject extends BaseData implements Serializable {
 	@Column(name = "subjectno", unique = true)
 	private String subjectno;
 
-	@Column(name = "subjectname")
+	@Column(name = "subject_name")
 	private String subjectname;
 
 	@Column(name = "textbook")

@@ -29,8 +29,8 @@ public class BaseData implements Serializable {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "id", columnDefinition = "BINARY(16)")
-    private UUID id;
+	@Column(name = "id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
+	private UUID id;
 	
 	@Column(name = "createdBy")
 	private String createdBy = "admin";
