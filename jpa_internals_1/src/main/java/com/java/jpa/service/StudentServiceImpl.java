@@ -2,6 +2,7 @@ package com.java.jpa.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -140,7 +141,28 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<StudentCourseSubject> getStudentsListBySubject(String subject) {
-		List<Student> studentsListBySubject = studentRepository.findAllById(null);
-		return null;
+		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectname(subject);
+		System.err.println(studentsListBySubject);
+		List<StudentCourseSubject> studentCourseSubjectsList = new ArrayList<>();
+		
+		for(Student element : studentsListBySubject) {
+			studentCourseSubjectsList.add(StudentCourseSubject
+					.builder()
+					.firstname(element.getFirstname())
+					.lastname(element.getLastname())
+					.subjectname(subject)
+					.rollno(element.getRollno())
+					.coursename(element.getCourses().stream().map(Course::getCoursename).collect(Collectors.joining(" ")))
+					.courseno(element.getCourses().stream().map(Course::getCourseno).collect(Collectors.joining(" ")))
+					.subjectno(element.getCourses().stream()
+						    .map(course -> course.getSubjects().stream()
+						    	.filter(subjectNum -> subjectNum.getSubjectname().equalsIgnoreCase(subject))
+						        .map(Subject::getSubjectno)
+						        .collect(Collectors.joining(" ")))
+						    .collect(Collectors.joining(" ")))
+					.build());
+		}
+		
+		return studentCourseSubjectsList;
 	}
 }
