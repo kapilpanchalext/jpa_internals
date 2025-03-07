@@ -13,4 +13,6 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
 	List<Student> findAllByCoursesSubjectsSubjectname(String subject);
 
+	List<Student> findAllByCoursesSubjectsSubjectno(String subjectno);
+
 }

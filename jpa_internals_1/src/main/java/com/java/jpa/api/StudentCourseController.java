@@ -16,8 +16,11 @@ import com.java.jpa.entity.Course;
 import com.java.jpa.entity.Student;
 import com.java.jpa.entity.Subject;
 import com.java.jpa.mapper.MapperStudentCourseToStudentCourseModel;
+import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
+import com.java.jpa.model.StudentModel;
+import com.java.jpa.model.SubjectModel;
 import com.java.jpa.service.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -92,15 +95,21 @@ public class StudentCourseController {
 	}
 	
 	@GetMapping(path = "/getStudentsList")
-	public ResponseEntity<List<Student>> getStudentsList() {
-		List<Student> studentsList = service.getStudentsList();
+	public ResponseEntity<List<StudentModel>> getStudentsList() {
+		List<StudentModel> studentsList = service.getStudentsList();
 		return ResponseEntity.status(HttpStatus.OK).body(studentsList);
 	}
 	
 	@GetMapping(path = "/getCourseList")
-	public ResponseEntity<List<Course>> getCourseList() {
-		List<Course> courseList = service.getCourseList();
+	public ResponseEntity<List<CourseModel>> getCourseList() {
+		List<CourseModel> courseList = service.getCourseList();
 		return ResponseEntity.status(HttpStatus.OK).body(courseList);
+	}
+	
+	@GetMapping(path = "/getSubjectList")
+	public ResponseEntity<List<SubjectModel>> getSubjectList() {
+		List<SubjectModel> subjectList = service.getSubjectList();
+		return ResponseEntity.status(HttpStatus.OK).body(subjectList);
 	}
 	
 	@PutMapping(path = "/assignCoursesToStudents")
@@ -130,6 +139,14 @@ public class StudentCourseController {
 	public ResponseEntity<List<StudentCourseSubject>> getStudentsListBySubject(@RequestParam String subject) {
 		
 		List<StudentCourseSubject> studentsListBySubject = service.getStudentsListBySubject(subject);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(studentsListBySubject);
+	}
+	
+	@GetMapping(path = "/list-students-by-subjectno")
+	public ResponseEntity<List<StudentCourseSubject>> getStudentsListBySubjectNo(@RequestParam String subjectno) {
+		
+		List<StudentCourseSubject> studentsListBySubject = service.getStudentsListBySubjectNo(subjectno);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(studentsListBySubject);
 	}

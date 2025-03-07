@@ -5,7 +5,10 @@ import java.util.List;
 import com.java.jpa.entity.Course;
 import com.java.jpa.entity.Student;
 import com.java.jpa.entity.Subject;
+import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourseSubject;
+import com.java.jpa.model.StudentModel;
+import com.java.jpa.model.SubjectModel;
 
 public interface StudentService {
 
@@ -21,9 +24,9 @@ public interface StudentService {
 
 	Course findCourseByCourseNo(String courseno);
 
-	List<Student> getStudentsList();
+	List<StudentModel> getStudentsList();
 
-	List<Course> getCourseList();
+	List<CourseModel> getCourseList();
 
 	Student assignCoursesToStudents(String rollNo, String courseNo);
 
@@ -34,5 +37,9 @@ public interface StudentService {
 	List<StudentCourseSubject> getStudentCourseSubjectMappings();
 
 	List<StudentCourseSubject> getStudentsListBySubject(String subject);
+
+	List<StudentCourseSubject> getStudentsListBySubjectNo(String subjectno);
+
+	List<SubjectModel> getSubjectList();
 
 }

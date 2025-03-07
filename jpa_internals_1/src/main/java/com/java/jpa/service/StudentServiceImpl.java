@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import com.java.jpa.entity.Course;
 import com.java.jpa.entity.Student;
 import com.java.jpa.entity.Subject;
+import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourseSubject;
+import com.java.jpa.model.StudentModel;
+import com.java.jpa.model.SubjectModel;
 import com.java.jpa.repo.CourseRepository;
 import com.java.jpa.repo.StudentRepository;
 import com.java.jpa.repo.SubjectRepository;
@@ -56,13 +59,40 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getStudentsList() {
-		return studentRepository.findAll();
+	public List<StudentModel> getStudentsList() {
+		List<Student> studentsList = studentRepository.findAll();
+		List<StudentModel> studentModelList = new ArrayList<>();
+		for(Student element : studentsList) {
+			studentModelList.add(StudentModel
+					.builder()
+					.firstname(element.getFirstname())
+					.lastname(element.getLastname())
+					.address(element.getAddress())
+					.age(element.getAge())
+					.dob(element.getDob())
+					.gender(element.getGender())
+					.isStudent(element.isStudent())
+					.mobileNumber(element.getMobileNumber())
+					.joiningDate(element.getJoiningDate())
+					.build());
+		}
+		return studentModelList;
 	}
 
 	@Override
-	public List<Course> getCourseList() {
-		return courseRepository.findAll();
+	public List<CourseModel> getCourseList() {
+		List<Course> courseList = courseRepository.findAll();
+		List<CourseModel> courseModelList = new ArrayList<>();
+		for(Course element : courseList) {
+			courseModelList.add(CourseModel
+					.builder()
+					.coursename(element.getCoursename())
+					.courseno(element.getCourseno())
+					.courseType(element.getCourseType())
+					.location(element.isLocation())
+					.build());
+		}
+		return courseModelList;
 	}
 
 	@Override
@@ -142,9 +172,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<StudentCourseSubject> getStudentsListBySubject(String subject) {
 		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectname(subject);
-		System.err.println(studentsListBySubject);
 		List<StudentCourseSubject> studentCourseSubjectsList = new ArrayList<>();
-		
 		for(Student element : studentsListBySubject) {
 			studentCourseSubjectsList.add(StudentCourseSubject
 					.builder()
@@ -152,10 +180,17 @@ public class StudentServiceImpl implements StudentService {
 					.lastname(element.getLastname())
 					.subjectname(subject)
 					.rollno(element.getRollno())
-					.coursename(element.getCourses().stream().map(Course::getCoursename).collect(Collectors.joining(" ")))
-					.courseno(element.getCourses().stream().map(Course::getCourseno).collect(Collectors.joining(" ")))
+					.coursename(element.getCourses()
+							.stream()
+							.map(Course::getCoursename)
+							.collect(Collectors.joining(" ")))
+					.courseno(element.getCourses()
+							.stream()
+							.map(Course::getCourseno)
+							.collect(Collectors.joining(" ")))
 					.subjectno(element.getCourses().stream()
-						    .map(course -> course.getSubjects().stream()
+						    .map(course -> course.getSubjects()
+						    	.stream()
 						    	.filter(subjectNum -> subjectNum.getSubjectname().equalsIgnoreCase(subject))
 						        .map(Subject::getSubjectno)
 						        .collect(Collectors.joining(" ")))
@@ -164,5 +199,44 @@ public class StudentServiceImpl implements StudentService {
 		}
 		
 		return studentCourseSubjectsList;
+	}
+
+	@Override
+	public List<StudentCourseSubject> getStudentsListBySubjectNo(String subjectno) {
+		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectno(subjectno);
+		List<StudentCourseSubject> studentCourseSubjectsList = new ArrayList<>();
+		for(Student element : studentsListBySubject) {
+			studentCourseSubjectsList.add(StudentCourseSubject
+					.builder()
+					.firstname(element.getFirstname())
+					.lastname(element.getLastname())
+					.rollno(element.getRollno())
+					.coursename(element.getCourses()
+							.stream()
+							.map(Course::getCoursename)
+							.collect(Collectors.joining(" ")))
+					.courseno(element.getCourses()
+							.stream()
+							.map(Course::getCourseno)
+							.collect(Collectors.joining(" ")))
+					.subjectno(subjectno)
+					.build());
+		}
+		return studentCourseSubjectsList;
+	}
+
+	@Override
+	public List<SubjectModel> getSubjectList() {
+		List<Subject> subjectList = subjectRepository.findAll();
+		List<SubjectModel> subjectModelList = new ArrayList<>();
+		for(Subject element : subjectList) {
+			subjectModelList.add(SubjectModel
+					.builder()
+					.subjectname(element.getSubjectname())
+					.subjectno(element.getSubjectno())
+					.textBook(element.getTextBook())
+					.build());
+		}
+		return subjectModelList;
 	}
 }
