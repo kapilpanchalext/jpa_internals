@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.java.jpa.entity.Course;
@@ -40,12 +41,13 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student findStudentById(String rollno) {
+//		return studentRepository.findByRollno(rollno);
 		return null;
 	}
 
 	@Override
 	public Course findCourseById(String courseno) {
-		return courseRepository.findById(Long.valueOf(courseno)).get();
+		return courseRepository.findByCourseno(Long.valueOf(courseno));
 	}
 
 	@Override
@@ -55,9 +57,11 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Course findCourseByCourseNo(String courseno) {
-		return courseRepository.findByCourseno(courseno);
+//		return courseRepository.findByCourseno(courseno);
+		return null;
 	}
 
+	@Cacheable(value = "students", key = "#id")
 	@Override
 	public List<StudentModel> getStudentsList() {
 		List<Student> studentsList = studentRepository.findAll();
@@ -79,6 +83,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentModelList;
 	}
 
+	@Cacheable(value = "courses", key = "#id")
 	@Override
 	public List<CourseModel> getCourseList() {
 		List<Course> courseList = courseRepository.findAll();
@@ -225,6 +230,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentCourseSubjectsList;
 	}
 
+	@Cacheable(value = "subjects", key = "#id")
 	@Override
 	public List<SubjectModel> getSubjectList() {
 		List<Subject> subjectList = subjectRepository.findAll();
