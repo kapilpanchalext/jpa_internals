@@ -33,9 +33,6 @@ public class Course extends BaseData implements Serializable {
 	@Column(name = "coursename")
 	private String coursename;
 
-	@Column(name = "subject")
-	private String subject;
-
 	@Column(name = "course_type")
 	private String courseType;
 

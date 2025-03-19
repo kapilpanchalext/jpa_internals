@@ -21,7 +21,6 @@ public interface MapperStudentCourseToStudentCourseModel {
     @Mapping(source = "student.student", target = "student")
     @Mapping(source = "course.courseno", target = "courseno")
     @Mapping(source = "course.coursename", target = "coursename")
-    @Mapping(source = "course.subject", target = "subject")
     @Mapping(source = "course.courseType", target = "courseType")
     @Mapping(source = "course.location", target = "location")
     StudentCourse toStudentCourse(Student student, Course course);
@@ -37,7 +36,6 @@ public interface MapperStudentCourseToStudentCourseModel {
 
     @Mapping(source = "courseno", target = "courseno")
     @Mapping(source = "coursename", target = "coursename")
-    @Mapping(source = "subject", target = "subject")
     @Mapping(source = "courseType", target = "courseType")
     @Mapping(source = "location", target = "location")
     Course toCourse(StudentCourse studentCourse);

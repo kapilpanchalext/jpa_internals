@@ -47,7 +47,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Course findCourseById(String courseno) {
-		return courseRepository.findByCourseno(Long.valueOf(courseno));
+		return courseRepository.findByCourseno(courseno);
 	}
 
 	@Override
@@ -144,7 +144,6 @@ public class StudentServiceImpl implements StudentService {
                             .lastname(student.getLastname())
                             .courseno(course.getCourseno())
                             .coursename(course.getCoursename())
-                            .subject(course.getSubject())
                             .courseType(course.getCourseType())
                             .subjectno(null) // No subject
                             .subjectname(null)
@@ -160,7 +159,6 @@ public class StudentServiceImpl implements StudentService {
                             .lastname(student.getLastname())
                             .courseno(course.getCourseno())
                             .coursename(course.getCoursename())
-                            .subject(course.getSubject())
                             .courseType(course.getCourseType())
                             .subjectno(subject.getSubjectno())
                             .subjectname(subject.getSubjectname())

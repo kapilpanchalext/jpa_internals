@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,14 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class BaseData implements Serializable {
 	private static final long serialVersionUID = 8883715387022232251L;
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "id")
-//	private long id;
-	
 	@Id
 	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
 	private UUID id;
 	

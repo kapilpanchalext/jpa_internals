@@ -10,6 +10,4 @@ public interface CourseRepository extends JpaRepository<Course, UUID>{
 
 	Course findByCourseno(String courseno);
 
-	Course findByCourseno(Long valueOf);
-
 }
