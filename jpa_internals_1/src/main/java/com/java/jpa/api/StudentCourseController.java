@@ -34,29 +34,15 @@ public class StudentCourseController {
 	
 	@GetMapping(path = "/getStudentDetails")
 	public ResponseEntity<StudentCourse> getStudentDetails(@RequestParam String rollNo, @RequestParam String courseNo) {
-		
-//		Student student = new Student("R123", "John", "Doe", "123 Street", 1234567890L, (byte) 20, true, 101);
-//		Course course = new Course("C001", "Mathematics", "Algebra", "Online", true);
-
 		Student student = service.findStudentByRollNo(rollNo);
 		Course course = service.findCourseByCourseNo(courseNo);
 		StudentCourse studentCourse = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudentCourse(student, course);
-
 		System.out.println(studentCourse);
-		
 		return ResponseEntity.status(HttpStatus.OK).body(studentCourse);
 	}
 	
 	@PostMapping(path = "/saveStudentCourseDetails")
-	public ResponseEntity<String> getStudentDetails(@RequestBody StudentCourse studentCourse) {
-		
-//		Student student = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudent(studentCourse);
-//		Course course = MapperStudentCourseToStudentCourseModel.INSTANCE.toCourse(studentCourse);
-//		
-//		service.saveStudent(student);
-//		service.saveCourse(course);
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body("Successful!");
+	public ResponseEntity<String> saveStudentCourseDetails(@RequestBody StudentCourse studentCourse) {
 		
 		// Convert DTO to Entity
 	    Student student = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudent(studentCourse);
@@ -70,9 +56,6 @@ public class StudentCourseController {
 	    
 	    // Establish Many-to-Many relationship
 	    existingStudent.getCourses().add(course);
-//	    existingCourse.getStudents().add(student);
-//	    student.getCourses().add(course);
-//	    course.getStudents().add(student);
 	    // Save student and course
 	    Student savedStudent = service.saveStudent(existingStudent);
 	    service.saveCourse(existingCourse);
@@ -97,6 +80,12 @@ public class StudentCourseController {
 	@GetMapping(path = "/getStudentsList")
 	public ResponseEntity<List<StudentModel>> getStudentsList() {
 		List<StudentModel> studentsList = service.getStudentsList();
+		return ResponseEntity.status(HttpStatus.OK).body(studentsList);
+	}
+	
+	@GetMapping(path = "/getStudentsListEntity")
+	public ResponseEntity<List<Student>> getStudentsListEntity() {
+		List<Student> studentsList = service.getStudentsListEntity();
 		return ResponseEntity.status(HttpStatus.OK).body(studentsList);
 	}
 	
@@ -137,17 +126,19 @@ public class StudentCourseController {
 	
 	@GetMapping(path = "/list-students-by-subject")
 	public ResponseEntity<List<StudentCourseSubject>> getStudentsListBySubject(@RequestParam String subject) {
-		
 		List<StudentCourseSubject> studentsListBySubject = service.getStudentsListBySubject(subject);
-		
 		return ResponseEntity.status(HttpStatus.OK).body(studentsListBySubject);
 	}
 	
 	@GetMapping(path = "/list-students-by-subjectno")
 	public ResponseEntity<List<StudentCourseSubject>> getStudentsListBySubjectNo(@RequestParam String subjectno) {
-		
 		List<StudentCourseSubject> studentsListBySubject = service.getStudentsListBySubjectNo(subjectno);
-		
 		return ResponseEntity.status(HttpStatus.OK).body(studentsListBySubject);
+	}
+	
+	@GetMapping(path = "/getStudentByRollno")
+	public ResponseEntity<List<StudentCourse>> getStudentByRollNo(@RequestParam int rollNo) {
+		List<StudentCourse> studentsList = service.getStudentByRollNo(rollNo);
+		return ResponseEntity.status(HttpStatus.OK).body(studentsList);
 	}
 }

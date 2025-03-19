@@ -6,6 +6,7 @@ import com.java.jpa.entity.Course;
 import com.java.jpa.entity.Student;
 import com.java.jpa.entity.Subject;
 import com.java.jpa.model.CourseModel;
+import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
 import com.java.jpa.model.StudentModel;
 import com.java.jpa.model.SubjectModel;
@@ -41,5 +42,9 @@ public interface StudentService {
 	List<StudentCourseSubject> getStudentsListBySubjectNo(String subjectno);
 
 	List<SubjectModel> getSubjectList();
+
+	List<Student> getStudentsListEntity();
+
+	List<StudentCourse> getStudentByRollNo(int rollNo);
 
 }

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.java.jpa.entity.Course;
 import com.java.jpa.entity.Student;
 import com.java.jpa.entity.Subject;
 import com.java.jpa.model.CourseModel;
+import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
 import com.java.jpa.model.StudentModel;
 import com.java.jpa.model.SubjectModel;
@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
 		return null;
 	}
 
-	@Cacheable(value = "students", key = "#id")
+//	@Cacheable(value = "students", key = "#root.methodName")
 	@Override
 	public List<StudentModel> getStudentsList() {
 		List<Student> studentsList = studentRepository.findAll();
@@ -69,21 +69,23 @@ public class StudentServiceImpl implements StudentService {
 		for(Student element : studentsList) {
 			studentModelList.add(StudentModel
 					.builder()
+					.rollno(element.getRollno())
 					.firstname(element.getFirstname())
 					.lastname(element.getLastname())
-					.address(element.getAddress())
+//					.address(element.getAddress())
 					.age(element.getAge())
 					.dob(element.getDob())
-					.gender(element.getGender())
-					.isStudent(element.isStudent())
+//					.gender(element.getGender())
+//					.isStudent(element.isStudent())
 					.mobileNumber(element.getMobileNumber())
 					.joiningDate(element.getJoiningDate())
+					
 					.build());
 		}
 		return studentModelList;
 	}
 
-	@Cacheable(value = "courses", key = "#id")
+//	@Cacheable(value = "courses", key = "#root.methodName")
 	@Override
 	public List<CourseModel> getCourseList() {
 		List<Course> courseList = courseRepository.findAll();
@@ -145,7 +147,7 @@ public class StudentServiceImpl implements StudentService {
                             .courseno(course.getCourseno())
                             .coursename(course.getCoursename())
                             .courseType(course.getCourseType())
-                            .subjectno(null) // No subject
+                            .subjectno(null)
                             .subjectname(null)
                             .textBook(null)
                             .build());
@@ -228,7 +230,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentCourseSubjectsList;
 	}
 
-	@Cacheable(value = "subjects", key = "#id")
+//	@Cacheable(value = "subjects", key = "#root.methodName")
 	@Override
 	public List<SubjectModel> getSubjectList() {
 		List<Subject> subjectList = subjectRepository.findAll();
@@ -242,5 +244,46 @@ public class StudentServiceImpl implements StudentService {
 					.build());
 		}
 		return subjectModelList;
+	}
+
+	@Override
+	public List<Student> getStudentsListEntity() {
+		List<Student> studentsList = studentRepository.findAll();
+		return studentsList;
+	}
+
+	@Override
+	public List<StudentCourse> getStudentByRollNo(int rollNo) {
+		Student studentModel = studentRepository.findByRollno(String.valueOf(rollNo));
+		System.err.println(studentModel);
+
+		List<StudentCourse> studentCourseList = new ArrayList<>();
+		List<Course> courseList = new ArrayList<>(studentModel.getCourses());
+		
+		for(Course element : courseList) {
+			if(element.getSubjects().size() == 0) {
+				studentCourseList.add(StudentCourse.builder()
+						.rollno(studentModel.getRollno())
+						.firstname(studentModel.getFirstname())
+						.lastname(studentModel.getLastname())
+						.coursename(element.getCoursename())
+						.courseno(element.getCourseno())
+						.courseType(element.getCourseType())
+						.build());
+			} else {
+				for(Subject innerElement : element.getSubjects()) {
+					studentCourseList.add(StudentCourse.builder()
+							.rollno(studentModel.getRollno())
+							.firstname(studentModel.getFirstname())
+							.lastname(studentModel.getLastname())
+							.coursename(element.getCoursename())
+							.courseno(element.getCourseno())
+							.courseType(element.getCourseType())
+							.subject(innerElement.getSubjectname())
+							.build());
+				}
+			}
+		}
+		return studentCourseList;
 	}
 }
