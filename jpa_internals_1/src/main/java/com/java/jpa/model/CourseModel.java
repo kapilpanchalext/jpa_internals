@@ -1,6 +1,7 @@
 package com.java.jpa.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ public class CourseModel implements Serializable {
 
 	private String courseno;
 	private String coursename;
-	private String subject;
+	private List<SubjectModel> subject;
 	private String courseType;
 	private boolean location;
 }

@@ -2,6 +2,7 @@ package com.java.jpa.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -89,14 +90,28 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<CourseModel> getCourseList() {
 		List<Course> courseList = courseRepository.findAll();
+		System.err.println(courseList);
 		List<CourseModel> courseModelList = new ArrayList<>();
 		for(Course element : courseList) {
+			
+			List<SubjectModel> subjectModel = new ArrayList<>();
+			Set<Subject> subject = element.getSubjects();
+			
+			for(Subject innerElement : subject) {
+				subjectModel.add(SubjectModel.builder()
+						.subjectname(innerElement.getSubjectname())
+						.subjectno(innerElement.getSubjectno())
+						.textBook(innerElement.getTextBook())
+						.build());
+			}
+			
 			courseModelList.add(CourseModel
 					.builder()
 					.coursename(element.getCoursename())
 					.courseno(element.getCourseno())
 					.courseType(element.getCourseType())
 					.location(element.isLocation())
+					.subject(subjectModel)
 					.build());
 		}
 		return courseModelList;
@@ -234,6 +249,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<SubjectModel> getSubjectList() {
 		List<Subject> subjectList = subjectRepository.findAll();
+		System.err.println(subjectList);
 		List<SubjectModel> subjectModelList = new ArrayList<>();
 		for(Subject element : subjectList) {
 			subjectModelList.add(SubjectModel
