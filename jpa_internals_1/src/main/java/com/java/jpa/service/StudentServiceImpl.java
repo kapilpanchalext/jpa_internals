@@ -67,20 +67,44 @@ public class StudentServiceImpl implements StudentService {
 	public List<StudentModel> getStudentsList() {
 		List<Student> studentsList = studentRepository.findAll();
 		List<StudentModel> studentModelList = new ArrayList<>();
+		
 		for(Student element : studentsList) {
+			List<CourseModel>courseModelList = new ArrayList<>();
+			Set<Course> courses = element.getCourses();
+			
+			for(Course innerElement : courses) {
+				List<SubjectModel> subjectModelList = new ArrayList<>();
+				Set<Subject> subjects = innerElement.getSubjects();
+				
+				for(Subject innerInnerElement : subjects) {
+					subjectModelList.add(SubjectModel.builder()
+							.subjectname(innerInnerElement.getSubjectname())
+							.subjectno(innerInnerElement.getSubjectno())
+							.textBook(innerInnerElement.getTextBook())
+							.build());
+				}
+				
+				courseModelList.add(CourseModel.builder()
+						.coursename(innerElement.getCoursename())
+						.courseno(innerElement.getCourseno())
+						.courseType(innerElement.getCourseType())
+						.subject(subjectModelList)
+						.build());
+			}
+			
 			studentModelList.add(StudentModel
 					.builder()
 					.rollno(element.getRollno())
 					.firstname(element.getFirstname())
 					.lastname(element.getLastname())
-//					.address(element.getAddress())
+					.address(element.getAddress())
 					.age(element.getAge())
 					.dob(element.getDob())
-//					.gender(element.getGender())
-//					.isStudent(element.isStudent())
+					.gender(element.getGender())
+					.isStudent(element.isStudent())
 					.mobileNumber(element.getMobileNumber())
 					.joiningDate(element.getJoiningDate())
-					
+					.courses(courseModelList)
 					.build());
 		}
 		return studentModelList;
