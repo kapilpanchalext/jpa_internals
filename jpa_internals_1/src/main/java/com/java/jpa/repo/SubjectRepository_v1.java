@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.java.jpa.entity.Subject;
 @Deprecated
-public interface SubjectRepository extends JpaRepository<Subject, UUID>{
+public interface SubjectRepository_v1 extends JpaRepository<Subject, UUID>{
 	@Deprecated
 	Subject findBySubjectno(String subjectNo);
 

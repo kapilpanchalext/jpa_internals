@@ -15,9 +15,9 @@ import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
 import com.java.jpa.model.StudentModel;
 import com.java.jpa.model.SubjectModel;
-import com.java.jpa.repo.CourseRepository;
-import com.java.jpa.repo.StudentRepository;
-import com.java.jpa.repo.SubjectRepository;
+import com.java.jpa.repo.CourseRepository_v1;
+import com.java.jpa.repo.StudentRepository_v1;
+import com.java.jpa.repo.SubjectRepository_v1;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +27,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentServiceImpl_v1 implements StudentService_v1 {
 
-	private final StudentRepository studentRepository;	
-	private final CourseRepository courseRepository;
-	private final SubjectRepository subjectRepository;
+	private final StudentRepository_v1 studentRepository;	
+	private final CourseRepository_v1 courseRepository;
+	private final SubjectRepository_v1 subjectRepository;
 	
 	@Deprecated
 	@Override
