@@ -33,7 +33,6 @@ public class Subject_v2 extends BaseData_v1 implements Serializable {
 	@Column(name = "subjectname", length = 50)
 	private String subjectname;
 	
-	@EqualsAndHashCode.Exclude
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(

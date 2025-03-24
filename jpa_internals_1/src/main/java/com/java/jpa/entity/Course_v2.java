@@ -29,32 +29,30 @@ public class Course_v2 extends BaseData_v1 implements Serializable {
 
 	@Column(name = "courseno", unique = true, updatable = false, length = 30)
 	private String courseno;
-	
+
 	@Column(name = "coursename", length = 255)
 	private String coursename;
-	
+
 	@Column(name = "coursetype", length = 30)
 	private String courseType;
-	
+
 	@Column(name = "location", length = 30)
 	private String location;
-	
-	@EqualsAndHashCode.Exclude
+
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-        name = "course_student", 
-        joinColumns = @JoinColumn(name = "course_id"), 
+        name = "course_student",
+        joinColumns = @JoinColumn(name = "course_id"),
         inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private Set<Student_v2> students = new HashSet<>();
-	
-	@EqualsAndHashCode.Exclude
+
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-        name = "course_subject", 
-        joinColumns = @JoinColumn(name = "course_id"), 
+        name = "course_subject",
+        joinColumns = @JoinColumn(name = "course_id"),
         inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
     private Set<Subject_v2> subjects = new HashSet<>();
