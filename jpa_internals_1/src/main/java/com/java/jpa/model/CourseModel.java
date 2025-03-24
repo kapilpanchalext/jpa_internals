@@ -17,7 +17,8 @@ public class CourseModel implements Serializable {
 
 	private String courseno;
 	private String coursename;
-	private List<SubjectModel> subject;
 	private String courseType;
-	private boolean location;
+	private String location;
+	List<StudentModel> studentsList;
+	List<SubjectModel> subjectsList;
 }
