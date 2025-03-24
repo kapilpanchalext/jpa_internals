@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+import com.java.jpa.api.StudentCourseController_v1;
+import com.java.jpa.api.StudentCourseController_v2;
 import com.java.jpa.entity.Course_v2;
 import com.java.jpa.entity.Student_v2;
 import com.java.jpa.entity.Subject_v2;
@@ -26,10 +27,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl_v2 implements StudentService_v2 {
+
 	private final StudentRepository_v2 studentRepository;
 	private final CourseRepository_v2 courseRepository;
 	private final SubjectRepository_v2 subjectRepository;
 	private final TextBookRepository_v1 textBookRepository;
+
 
 	@Override
 	public List<StudentModel> getStudentsList() {
@@ -108,6 +111,8 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 		
 		Course_v2 savedCourse = courseRepository.save(course);
 		
+		System.err.println(savedCourse);
+		
 		StudentModel studentModelSaved = StudentModel.builder()
 				.firstname(student.getFirstname())
 				.lastname(student.getLastname())
@@ -135,10 +140,12 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 	@Transactional
 	@Override
 	public SubjectModel assignTextBookToSubject(String isbn, String subjectNo) {
-		TextBook_v1 textBook = textBookRepository.findByIsbn(isbn);
 		Subject_v2 subject = subjectRepository.findBySubjectno(subjectNo);
+		TextBook_v1 textBook = textBookRepository.findByIsbn(isbn);
 		subject.getTextbooks().add(textBook);
 		Subject_v2 mappedSubject = subjectRepository.save(subject);
+		
+		System.err.println(mappedSubject);
 		
 		TextBookModel textBookModel = TextBookModel.builder()
 				.authorName(textBook.getAuthorName())
