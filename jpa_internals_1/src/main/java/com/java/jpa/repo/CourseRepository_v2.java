@@ -8,4 +8,6 @@ import com.java.jpa.entity.Course_v2;
 
 public interface CourseRepository_v2 extends JpaRepository<Course_v2, UUID>{
 
+	Course_v2 findByCourseno(String courseNo);
+
 }

@@ -5,10 +5,13 @@ import java.util.List;
 import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentModel;
 import com.java.jpa.model.SubjectModel;
+import com.java.jpa.model.TextBookModel;
 
 public interface StudentService_v2 {
 
 	List<StudentModel> getStudentsList();
 	List<CourseModel> getCoursesList();
 	List<SubjectModel> getSubjectsList();
+	List<TextBookModel> getTextBooksList();
+	CourseModel assignCourseToStudent(String courseNo, String rollNo);
 }
