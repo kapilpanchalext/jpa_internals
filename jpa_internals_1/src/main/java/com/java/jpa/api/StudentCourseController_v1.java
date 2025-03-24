@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.java.jpa.entity.Course_v1;
 import com.java.jpa.entity.Student_v1;
 import com.java.jpa.entity.Subject_v1;
-import com.java.jpa.mapper.MapperStudentCourseToStudentCourseModel;
 import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
@@ -36,11 +35,12 @@ public class StudentCourseController_v1 {
 	@Deprecated
 	@GetMapping(path = "/getStudentDetails")
 	public ResponseEntity<StudentCourse> getStudentDetails(@RequestParam String rollNo, @RequestParam String courseNo) {
-		Student_v1 student = service.findStudentByRollNo(rollNo);
-		Course_v1 course = service.findCourseByCourseNo(courseNo);
-		StudentCourse studentCourse = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudentCourse(student, course);
-		System.out.println(studentCourse);
-		return ResponseEntity.status(HttpStatus.OK).body(studentCourse);
+//		Student_v1 student = service.findStudentByRollNo(rollNo);
+//		Course_v1 course = service.findCourseByCourseNo(courseNo);
+//		StudentCourse studentCourse = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudentCourse(student, course);
+//		System.out.println(studentCourse);
+//		return ResponseEntity.status(HttpStatus.OK).body(studentCourse);
+		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 	
 	@Deprecated
@@ -48,20 +48,20 @@ public class StudentCourseController_v1 {
 	public ResponseEntity<String> saveStudentCourseDetails(@RequestBody StudentCourse studentCourse) {
 		
 		// Convert DTO to Entity
-	    Student_v1 student = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudent(studentCourse);
-	    Course_v1 course = MapperStudentCourseToStudentCourseModel.INSTANCE.toCourse(studentCourse);
-
-	    // Check if student already exists
-	    Student_v1 existingStudent = student;
-	    
-	    // Check if course already exists
-	    Course_v1 existingCourse = course;
-	    
-	    // Establish Many-to-Many relationship
-	    existingStudent.getCourses().add(course);
-	    // Save student and course
-	    Student_v1 savedStudent = service.saveStudent(existingStudent);
-	    service.saveCourse(existingCourse);
+//	    Student_v1 student = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudent(studentCourse);
+//	    Course_v1 course = MapperStudentCourseToStudentCourseModel.INSTANCE.toCourse(studentCourse);
+//
+//	     Check if student already exists
+//	    Student_v1 existingStudent = student;
+//	    
+//	    // Check if course already exists
+//	    Course_v1 existingCourse = course;
+//	    
+//	    // Establish Many-to-Many relationship
+//	    existingStudent.getCourses().add(course);
+//	    // Save student and course
+//	    Student_v1 savedStudent = service.saveStudent(existingStudent);
+//	    service.saveCourse(existingCourse);
 
 	    return ResponseEntity
 	    			.status(HttpStatus.OK)

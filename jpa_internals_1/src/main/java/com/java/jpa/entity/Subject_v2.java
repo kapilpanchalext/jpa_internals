@@ -27,14 +27,11 @@ import lombok.NoArgsConstructor;
 public class Subject_v2 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = -5308820404851319231L;
 	
-	@Column(name = "subjectno", unique = true, updatable = false)
+	@Column(name = "subjectno", unique = true, updatable = false, length = 30)
 	private String subjectno;
 	
-	@Column(name = "subject_name")
+	@Column(name = "subject_name", length = 50)
 	private String subjectname;
-	
-	@Column(name = "textbook")
-	private String textBook;
 	
 	@EqualsAndHashCode.Exclude
 	@Builder.Default

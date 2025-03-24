@@ -21,12 +21,12 @@ import lombok.NoArgsConstructor;
 public class TextBook_v1 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = 876348942963178298L;
 
-	@Column(name = "isbn", unique = true, updatable = false)
+	@Column(name = "isbn", unique = true, updatable = false, length = 30)
 	private String isbn;
 	
-	@Column(name = "textbook_name")
+	@Column(name = "textbook_name", length = 255)
 	private String textbookName;
 	
-	@Column(name = "author_name")
+	@Column(name = "author_name", length = 100)
 	private String authorName;
 }

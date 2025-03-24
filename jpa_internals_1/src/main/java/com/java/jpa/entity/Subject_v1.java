@@ -12,13 +12,13 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Deprecated
-@Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
-@Table(name = "subject", catalog = "jpa_internals")
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Builder
+//@Entity
+//@Data
+//@EqualsAndHashCode(callSuper = true)
+//@Table(name = "subject", catalog = "jpa_internals")
+//@AllArgsConstructor
+//@RequiredArgsConstructor
+//@Builder
 public class Subject_v1 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = -1202970504720736463L;
 

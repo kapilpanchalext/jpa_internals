@@ -18,13 +18,13 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Deprecated
-@Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
-@Table(name = "course", catalog = "jpa_internals")
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Builder
+//@Entity
+//@Data
+//@EqualsAndHashCode(callSuper = true)
+//@Table(name = "course", catalog = "jpa_internals")
+//@AllArgsConstructor
+//@RequiredArgsConstructor
+//@Builder
 public class Course_v1 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = -331452226800855670L;
 	
@@ -46,7 +46,7 @@ public class Course_v1 extends BaseData_v1 implements Serializable {
 	
 	@Deprecated
 	@EqualsAndHashCode.Exclude
-	@Builder.Default
+//	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "course_subject", 

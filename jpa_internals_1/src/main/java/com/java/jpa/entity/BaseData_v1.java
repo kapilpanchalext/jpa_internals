@@ -21,18 +21,18 @@ public class BaseData_v1 implements Serializable {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
-	@Column(name = "id", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
+	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 	
-	@Column(name = "createdBy")
+	@Column(name = "createdby", length = 50)
 	private String createdBy = "admin";
 	
-	@Column(name = "createdAt")
+	@Column(name = "createdat")
 	private LocalDateTime createdAt = LocalDateTime.now();
 	
-	@Column(name = "modifiedBy")
+	@Column(name = "modifiedby", length = 50)
 	private String modifiedBy = "admin";
 	
-	@Column(name = "modifiedOn")
+	@Column(name = "modifiedon")
 	private LocalDateTime modifiedOn = LocalDateTime.now();
 }

@@ -27,16 +27,16 @@ import lombok.NoArgsConstructor;
 public class Course_v2 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = -222529697388266058L;
 
-	@Column(name = "courseno", unique = true, updatable = false)
+	@Column(name = "courseno", unique = true, updatable = false, length = 30)
 	private String courseno;
 	
-	@Column(name = "coursename")
+	@Column(name = "coursename", length = 255)
 	private String coursename;
 	
-	@Column(name = "course_type")
+	@Column(name = "coursetype", length = 30)
 	private String courseType;
 	
-	@Column(name = "location")
+	@Column(name = "location", length = 30)
 	private String location;
 	
 	@EqualsAndHashCode.Exclude

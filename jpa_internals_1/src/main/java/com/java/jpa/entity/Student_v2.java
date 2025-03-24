@@ -24,23 +24,23 @@ import lombok.RequiredArgsConstructor;
 public class Student_v2 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = 6857761803112680669L;
 	
-	@Column(name = "rollno", unique = true, updatable = false)
+	@Column(name = "rollno", unique = true, updatable = false, length = 30)
 	private String rollno;
 	
-	@Column(name = "firstname")
+	@Column(name = "firstname", length = 100)
 	private String firstname;
 	
-	@Column(name = "lastname")
+	@Column(name = "lastname", length = 100)
 	private String lastname;
 	
 	@Column(name = "dob")
 	private LocalDate dob;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "gender")
+	@Column(name = "gender", length = 30)
 	private Gender_v1 gender;
 	
-	@Column(name = "address")
+	@Column(name = "address", length = 255)
 	private String address;
 	
 	@Column(name = "mobileno")
