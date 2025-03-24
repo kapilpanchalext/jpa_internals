@@ -32,5 +32,5 @@ public class Subject_v1 extends BaseData_v1 implements Serializable {
 	
 	@Deprecated
 	@Column(name = "textbook")
-	private String textBook;	
+	private String textBook;
 }
