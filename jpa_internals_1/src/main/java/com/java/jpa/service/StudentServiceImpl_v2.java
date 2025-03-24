@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.java.jpa.entity.Student_v2;
-import com.java.jpa.mapper.MapperStudentCourseToStudentCourseModelImpl;
 import com.java.jpa.model.StudentModel;
 import com.java.jpa.repo.CourseRepository_v2;
 import com.java.jpa.repo.StudentRepository_v2;
@@ -20,8 +19,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl_v2 implements StudentService_v2 {
-
-    private final MapperStudentCourseToStudentCourseModelImpl mapperStudentCourseToStudentCourseModelImpl;
 
 	private final StudentRepository_v2 studentRepository;
 	private final CourseRepository_v2 courseRepository;
@@ -40,6 +37,7 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 					.dob(element.getDob())
 					.gender(element.getGender())
 					.age((byte)Period.between(element.getDob(), LocalDate.now()).getYears())
+					.address(element.getAddress())
 					.rollno(element.getRollno())
 					.isCurrent(element.isCurrent())
 					.joiningDate(element.getJoiningDate())
