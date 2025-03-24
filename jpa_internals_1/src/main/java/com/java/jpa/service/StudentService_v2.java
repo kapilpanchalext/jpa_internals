@@ -14,4 +14,5 @@ public interface StudentService_v2 {
 	List<SubjectModel> getSubjectsList();
 	List<TextBookModel> getTextBooksList();
 	CourseModel assignCourseToStudent(String courseNo, String rollNo);
+	SubjectModel assignTextBookToSubject(String isbn, String subjectNo);
 }

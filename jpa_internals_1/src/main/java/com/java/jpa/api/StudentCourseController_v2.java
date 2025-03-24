@@ -54,4 +54,10 @@ public class StudentCourseController_v2 {
 		CourseModel courseModel = service.assignCourseToStudent(courseNo, rollNo);
 		return ResponseEntity.status(HttpStatus.OK).body(courseModel);
 	}
+	
+	@PutMapping(path = "/assignTextBookToSubject")
+	public ResponseEntity<SubjectModel> assignTextBookToSubject(@RequestParam String isbn, @RequestParam String subjectNo){
+		SubjectModel subjectModel = service.assignTextBookToSubject(isbn, subjectNo);
+		return ResponseEntity.status(HttpStatus.OK).body(subjectModel);
+	}
 }

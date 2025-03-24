@@ -8,4 +8,6 @@ import com.java.jpa.entity.Subject_v2;
 
 public interface SubjectRepository_v2 extends JpaRepository<Subject_v2, UUID>{
 
+	Subject_v2 findBySubjectno(String subjectNo);
+
 }
