@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
 		return null;
 	}
 
-//	@Cacheable(value = "students", key = "#root.methodName")
+//	@Cacheable(value = "students")
 	@Override
 	public List<StudentModel> getStudentsList() {
 		List<Student> studentsList = studentRepository.findAll();
@@ -110,7 +110,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentModelList;
 	}
 
-//	@Cacheable(value = "courses", key = "#root.methodName")
+//	@Cacheable(value = "courses")
 	@Override
 	public List<CourseModel> getCourseList() {
 		List<Course> courseList = courseRepository.findAll();
@@ -269,7 +269,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentCourseSubjectsList;
 	}
 
-//	@Cacheable(value = "subjects", key = "#root.methodName")
+//	@Cacheable(value = "subjects")
 	@Override
 	public List<SubjectModel> getSubjectList() {
 		List<Subject> subjectList = subjectRepository.findAll();

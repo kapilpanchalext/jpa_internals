@@ -8,6 +8,7 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -41,7 +42,7 @@ public class Student extends BaseData implements Serializable {
 	@Column(name = "dob")
 	private LocalDate dob;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
 	private Gender gender;
 	
