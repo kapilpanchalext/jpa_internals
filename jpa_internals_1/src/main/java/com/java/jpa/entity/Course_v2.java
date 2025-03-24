@@ -44,8 +44,8 @@ public class Course_v2 extends BaseData_v1 implements Serializable {
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "course_student", 
-        joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"), 
-        inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
+        joinColumns = @JoinColumn(name = "course_id"), 
+        inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private Set<Student_v2> students = new HashSet<>();
 	
@@ -54,8 +54,8 @@ public class Course_v2 extends BaseData_v1 implements Serializable {
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "course_subject", 
-        joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"), 
-        inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+        joinColumns = @JoinColumn(name = "course_id"), 
+        inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
     private Set<Subject_v2> subjects = new HashSet<>();
 }
