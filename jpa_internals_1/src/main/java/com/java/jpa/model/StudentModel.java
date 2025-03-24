@@ -2,7 +2,6 @@ package com.java.jpa.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 import com.java.jpa.entity.Gender_v1;
 
@@ -27,6 +26,5 @@ public class StudentModel implements Serializable {
 	private long mobileNumber;
 	private byte age;
 	private LocalDate joiningDate;
-	private boolean isStudent;
-	private List<CourseModel> courses;
+	private boolean isCurrent;
 }
