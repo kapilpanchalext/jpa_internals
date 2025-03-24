@@ -5,15 +5,15 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.java.jpa.entity.Student;
+import com.java.jpa.entity.Student_v1;
 
 @Deprecated
-public interface StudentRepository_v1 extends JpaRepository<Student, UUID> {
+public interface StudentRepository_v1 extends JpaRepository<Student_v1, UUID> {
 	@Deprecated
-	Student findByRollno(String rollno);
+	Student_v1 findByRollno(String rollno);
 	@Deprecated
-	List<Student> findAllByCoursesSubjectsSubjectname(String subject);
+	List<Student_v1> findAllByCoursesSubjectsSubjectname(String subject);
 	@Deprecated
-	List<Student> findAllByCoursesSubjectsSubjectno(String subjectno);
+	List<Student_v1> findAllByCoursesSubjectsSubjectno(String subjectno);
 
 }

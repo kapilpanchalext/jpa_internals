@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.java.jpa.entity.Gender;
+import com.java.jpa.entity.Gender_v1;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +22,7 @@ public class StudentModel implements Serializable {
 	private String firstname;
 	private String lastname;
 	private LocalDate dob;
-	private Gender gender;
+	private Gender_v1 gender;
 	private String address;
 	private long mobileNumber;
 	private byte age;

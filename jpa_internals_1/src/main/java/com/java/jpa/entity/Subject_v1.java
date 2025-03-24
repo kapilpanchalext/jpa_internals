@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public class Subject extends BaseData implements Serializable {
+public class Subject_v1 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = -1202970504720736463L;
 
 	@Deprecated

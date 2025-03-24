@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.java.jpa.entity.Course;
-import com.java.jpa.entity.Student;
-import com.java.jpa.entity.Subject;
+import com.java.jpa.entity.Course_v1;
+import com.java.jpa.entity.Student_v1;
+import com.java.jpa.entity.Subject_v1;
 import com.java.jpa.mapper.MapperStudentCourseToStudentCourseModel;
 import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourse;
@@ -36,8 +36,8 @@ public class StudentCourseController_v1 {
 	@Deprecated
 	@GetMapping(path = "/getStudentDetails")
 	public ResponseEntity<StudentCourse> getStudentDetails(@RequestParam String rollNo, @RequestParam String courseNo) {
-		Student student = service.findStudentByRollNo(rollNo);
-		Course course = service.findCourseByCourseNo(courseNo);
+		Student_v1 student = service.findStudentByRollNo(rollNo);
+		Course_v1 course = service.findCourseByCourseNo(courseNo);
 		StudentCourse studentCourse = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudentCourse(student, course);
 		System.out.println(studentCourse);
 		return ResponseEntity.status(HttpStatus.OK).body(studentCourse);
@@ -48,19 +48,19 @@ public class StudentCourseController_v1 {
 	public ResponseEntity<String> saveStudentCourseDetails(@RequestBody StudentCourse studentCourse) {
 		
 		// Convert DTO to Entity
-	    Student student = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudent(studentCourse);
-	    Course course = MapperStudentCourseToStudentCourseModel.INSTANCE.toCourse(studentCourse);
+	    Student_v1 student = MapperStudentCourseToStudentCourseModel.INSTANCE.toStudent(studentCourse);
+	    Course_v1 course = MapperStudentCourseToStudentCourseModel.INSTANCE.toCourse(studentCourse);
 
 	    // Check if student already exists
-	    Student existingStudent = student;
+	    Student_v1 existingStudent = student;
 	    
 	    // Check if course already exists
-	    Course existingCourse = course;
+	    Course_v1 existingCourse = course;
 	    
 	    // Establish Many-to-Many relationship
 	    existingStudent.getCourses().add(course);
 	    // Save student and course
-	    Student savedStudent = service.saveStudent(existingStudent);
+	    Student_v1 savedStudent = service.saveStudent(existingStudent);
 	    service.saveCourse(existingCourse);
 
 	    return ResponseEntity
@@ -70,15 +70,15 @@ public class StudentCourseController_v1 {
 	
 	@Deprecated
 	@PostMapping(path = "/saveStudent")
-	public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
-		Student savedStudent = service.saveStudent(student);
+	public ResponseEntity<Student_v1> saveStudent(@RequestBody Student_v1 student) {
+		Student_v1 savedStudent = service.saveStudent(student);
 		return ResponseEntity.status(HttpStatus.OK).body(savedStudent);
 	}
 	
 	@Deprecated
 	@PostMapping(path = "/saveCourse")
-	public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
-		Course savedCourse = service.saveCourse(course);
+	public ResponseEntity<Course_v1> saveCourse(@RequestBody Course_v1 course) {
+		Course_v1 savedCourse = service.saveCourse(course);
 		return ResponseEntity.status(HttpStatus.OK).body(savedCourse);
 	}
 	
@@ -91,8 +91,8 @@ public class StudentCourseController_v1 {
 	
 	@Deprecated
 	@GetMapping(path = "/getStudentsListEntity")
-	public ResponseEntity<List<Student>> getStudentsListEntity() {
-		List<Student> studentsList = service.getStudentsListEntity();
+	public ResponseEntity<List<Student_v1>> getStudentsListEntity() {
+		List<Student_v1> studentsList = service.getStudentsListEntity();
 		return ResponseEntity.status(HttpStatus.OK).body(studentsList);
 	}
 	
@@ -112,22 +112,22 @@ public class StudentCourseController_v1 {
 	
 	@Deprecated
 	@PutMapping(path = "/assignCoursesToStudents")
-	public ResponseEntity<Student> assignCoursesToStudents(@RequestParam String rollNo, @RequestParam String courseNo){
-		Student student = service.assignCoursesToStudents(rollNo, courseNo);
+	public ResponseEntity<Student_v1> assignCoursesToStudents(@RequestParam String rollNo, @RequestParam String courseNo){
+		Student_v1 student = service.assignCoursesToStudents(rollNo, courseNo);
 		return ResponseEntity.status(HttpStatus.OK).body(student);
 	}
 	
 	@Deprecated
 	@PostMapping(path = "/saveSubject")
-	public ResponseEntity<Subject> saveSubject(@RequestBody Subject subject){
-		Subject savedSubject = service.saveSubject(subject);
+	public ResponseEntity<Subject_v1> saveSubject(@RequestBody Subject_v1 subject){
+		Subject_v1 savedSubject = service.saveSubject(subject);
 		return ResponseEntity.status(HttpStatus.OK).body(savedSubject);
 	}
 	
 	@Deprecated
 	@PutMapping(path = "/assignSubjectToCourse")
-	public ResponseEntity<Course> assignSubjectToCourse(@RequestParam String subjectNo, @RequestParam String courseNo){
-		Course savedCourse = service.assignSubjectToCourse(courseNo, subjectNo);
+	public ResponseEntity<Course_v1> assignSubjectToCourse(@RequestParam String subjectNo, @RequestParam String courseNo){
+		Course_v1 savedCourse = service.assignSubjectToCourse(courseNo, subjectNo);
 		return ResponseEntity.status(HttpStatus.OK).body(savedCourse);
 	}
 	

@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public class Student extends BaseData implements Serializable {
+public class Student_v1 extends BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = 339912208386100188L;
 	
 	@Deprecated
@@ -49,7 +49,7 @@ public class Student extends BaseData implements Serializable {
 	@Deprecated
 	@Enumerated
 	@Column(name = "gender")
-	private Gender gender;
+	private Gender_v1 gender;
 	
 	@Deprecated
 	@Column(name = "address")
@@ -80,5 +80,5 @@ public class Student extends BaseData implements Serializable {
         joinColumns = @JoinColumn(name = "student_rollno"), 
         inverseJoinColumns = @JoinColumn(name = "course_no")
     ) 
-    private Set<Course> courses = new HashSet<>();
+    private Set<Course_v1> courses = new HashSet<>();
 }

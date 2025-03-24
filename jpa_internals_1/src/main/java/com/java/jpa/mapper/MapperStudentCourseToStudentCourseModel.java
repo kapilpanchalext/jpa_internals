@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.java.jpa.entity.Course;
-import com.java.jpa.entity.Student;
+import com.java.jpa.entity.Course_v1;
+import com.java.jpa.entity.Student_v1;
 import com.java.jpa.model.StudentCourse;
 
 @Deprecated
@@ -24,7 +24,7 @@ public interface MapperStudentCourseToStudentCourseModel {
     @Mapping(source = "course.coursename", target = "coursename")
     @Mapping(source = "course.courseType", target = "courseType")
     @Mapping(source = "course.location", target = "location")
-    StudentCourse toStudentCourse(Student student, Course course);
+    StudentCourse toStudentCourse(Student_v1 student, Course_v1 course);
     
     @Mapping(source = "rollno", target = "rollno")
     @Mapping(source = "firstname", target = "firstname")
@@ -33,11 +33,11 @@ public interface MapperStudentCourseToStudentCourseModel {
     @Mapping(source = "mobileNumber", target = "mobileNumber")
     @Mapping(source = "age", target = "age")
     @Mapping(source = "student", target = "isStudent")
-    Student toStudent(StudentCourse studentCourse);
+    Student_v1 toStudent(StudentCourse studentCourse);
 
     @Mapping(source = "courseno", target = "courseno")
     @Mapping(source = "coursename", target = "coursename")
     @Mapping(source = "courseType", target = "courseType")
     @Mapping(source = "location", target = "location")
-    Course toCourse(StudentCourse studentCourse);
+    Course_v1 toCourse(StudentCourse studentCourse);
 }

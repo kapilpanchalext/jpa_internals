@@ -2,9 +2,9 @@ package com.java.jpa.service;
 
 import java.util.List;
 
-import com.java.jpa.entity.Course;
-import com.java.jpa.entity.Student;
-import com.java.jpa.entity.Subject;
+import com.java.jpa.entity.Course_v1;
+import com.java.jpa.entity.Student_v1;
+import com.java.jpa.entity.Subject_v1;
 import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
@@ -14,27 +14,27 @@ import com.java.jpa.model.SubjectModel;
 @Deprecated
 public interface StudentService_v1 {
 	@Deprecated
-	Student saveStudent(Student student);
+	Student_v1 saveStudent(Student_v1 student);
 	@Deprecated
-	Course saveCourse(Course course);
+	Course_v1 saveCourse(Course_v1 course);
 	@Deprecated
-	Student findStudentById(String rollno);
+	Student_v1 findStudentById(String rollno);
 	@Deprecated
-	Course findCourseById(String courseno);
+	Course_v1 findCourseById(String courseno);
 	@Deprecated
-	Student findStudentByRollNo(String rollno);
+	Student_v1 findStudentByRollNo(String rollno);
 	@Deprecated
-	Course findCourseByCourseNo(String courseno);
+	Course_v1 findCourseByCourseNo(String courseno);
 	@Deprecated
 	List<StudentModel> getStudentsList();
 	@Deprecated
 	List<CourseModel> getCourseList();
 	@Deprecated
-	Student assignCoursesToStudents(String rollNo, String courseNo);
+	Student_v1 assignCoursesToStudents(String rollNo, String courseNo);
 	@Deprecated
-	Subject saveSubject(Subject subject);
+	Subject_v1 saveSubject(Subject_v1 subject);
 	@Deprecated
-	Course assignSubjectToCourse(String courseNo, String subjectNo);
+	Course_v1 assignSubjectToCourse(String courseNo, String subjectNo);
 	@Deprecated
 	List<StudentCourseSubject> getStudentCourseSubjectMappings();
 	@Deprecated
@@ -44,7 +44,7 @@ public interface StudentService_v1 {
 	@Deprecated
 	List<SubjectModel> getSubjectList();
 	@Deprecated
-	List<Student> getStudentsListEntity();
+	List<Student_v1> getStudentsListEntity();
 	@Deprecated
 	List<StudentCourse> getStudentByRollNo(int rollNo);
 

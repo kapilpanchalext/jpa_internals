@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.java.jpa.entity.Course;
-import com.java.jpa.entity.Student;
-import com.java.jpa.entity.Subject;
+import com.java.jpa.entity.Course_v1;
+import com.java.jpa.entity.Student_v1;
+import com.java.jpa.entity.Subject_v1;
 import com.java.jpa.model.CourseModel;
 import com.java.jpa.model.StudentCourse;
 import com.java.jpa.model.StudentCourseSubject;
@@ -33,38 +33,38 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 	
 	@Deprecated
 	@Override
-	public Student saveStudent(Student student) {
+	public Student_v1 saveStudent(Student_v1 student) {
 		return studentRepository.save(student);
 	}
 	
 	@Deprecated
 	@Override
-	public Course saveCourse(Course course) {
+	public Course_v1 saveCourse(Course_v1 course) {
 		return courseRepository.save(course);		
 	}
 	
 	@Deprecated
 	@Override
-	public Student findStudentById(String rollno) {
+	public Student_v1 findStudentById(String rollno) {
 //		return studentRepository.findByRollno(rollno);
 		return null;
 	}
 	
 	@Deprecated
 	@Override
-	public Course findCourseById(String courseno) {
+	public Course_v1 findCourseById(String courseno) {
 		return courseRepository.findByCourseno(courseno);
 	}
 	
 	@Deprecated
 	@Override
-	public Student findStudentByRollNo(String rollno) {
+	public Student_v1 findStudentByRollNo(String rollno) {
 		return studentRepository.findByRollno(rollno);
 	}
 	
 	@Deprecated
 	@Override
-	public Course findCourseByCourseNo(String courseno) {
+	public Course_v1 findCourseByCourseNo(String courseno) {
 //		return courseRepository.findByCourseno(courseno);
 		return null;
 	}
@@ -73,18 +73,18 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 //	@Cacheable(value = "students")
 	@Override
 	public List<StudentModel> getStudentsList() {
-		List<Student> studentsList = studentRepository.findAll();
+		List<Student_v1> studentsList = studentRepository.findAll();
 		List<StudentModel> studentModelList = new ArrayList<>();
 		
-		for(Student element : studentsList) {
+		for(Student_v1 element : studentsList) {
 			List<CourseModel>courseModelList = new ArrayList<>();
-			Set<Course> courses = element.getCourses();
+			Set<Course_v1> courses = element.getCourses();
 			
-			for(Course innerElement : courses) {
+			for(Course_v1 innerElement : courses) {
 				List<SubjectModel> subjectModelList = new ArrayList<>();
-				Set<Subject> subjects = innerElement.getSubjects();
+				Set<Subject_v1> subjects = innerElement.getSubjects();
 				
-				for(Subject innerInnerElement : subjects) {
+				for(Subject_v1 innerInnerElement : subjects) {
 					subjectModelList.add(SubjectModel.builder()
 							.subjectname(innerInnerElement.getSubjectname())
 							.subjectno(innerInnerElement.getSubjectno())
@@ -122,15 +122,15 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 //	@Cacheable(value = "courses")
 	@Override
 	public List<CourseModel> getCourseList() {
-		List<Course> courseList = courseRepository.findAll();
+		List<Course_v1> courseList = courseRepository.findAll();
 		System.err.println(courseList);
 		List<CourseModel> courseModelList = new ArrayList<>();
-		for(Course element : courseList) {
+		for(Course_v1 element : courseList) {
 			
 			List<SubjectModel> subjectModel = new ArrayList<>();
-			Set<Subject> subject = element.getSubjects();
+			Set<Subject_v1> subject = element.getSubjects();
 			
-			for(Subject innerElement : subject) {
+			for(Subject_v1 innerElement : subject) {
 				subjectModel.add(SubjectModel.builder()
 						.subjectname(innerElement.getSubjectname())
 						.subjectno(innerElement.getSubjectno())
@@ -152,30 +152,30 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 	
 	@Deprecated
 	@Override
-	public Student assignCoursesToStudents(String rollNo, String courseNo) {
-		Student student = studentRepository.findByRollno(rollNo);
-		Course course = courseRepository.findByCourseno(courseNo);
+	public Student_v1 assignCoursesToStudents(String rollNo, String courseNo) {
+		Student_v1 student = studentRepository.findByRollno(rollNo);
+		Course_v1 course = courseRepository.findByCourseno(courseNo);
 		
 		student.getCourses().add(course);
-		Student savedStudent = studentRepository.save(student);
+		Student_v1 savedStudent = studentRepository.save(student);
 		return savedStudent;
 	}
 	
 	@Deprecated
 	@Override
-	public Subject saveSubject(Subject subject) {
+	public Subject_v1 saveSubject(Subject_v1 subject) {
 		return subjectRepository.save(subject);
 	}
 	
 	@Deprecated
 	@Override
-	public Course assignSubjectToCourse(String courseNo, String subjectNo) {
-		Course course = courseRepository.findByCourseno(courseNo);
-		Subject subject = subjectRepository.findBySubjectno(subjectNo);
+	public Course_v1 assignSubjectToCourse(String courseNo, String subjectNo) {
+		Course_v1 course = courseRepository.findByCourseno(courseNo);
+		Subject_v1 subject = subjectRepository.findBySubjectno(subjectNo);
 		
 		course.getSubjects().add(subject);
 		
-		Course savedCourse = courseRepository.save(course);
+		Course_v1 savedCourse = courseRepository.save(course);
 		return savedCourse;
 	}
 	
@@ -184,12 +184,12 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 	@Override
 	public List<StudentCourseSubject> getStudentCourseSubjectMappings() {
 		List<StudentCourseSubject> result = new ArrayList<>();
-        List<Student> students = studentRepository.findAll();
+        List<Student_v1> students = studentRepository.findAll();
         
-        for (Student student : students) {
+        for (Student_v1 student : students) {
             if (student.getCourses().isEmpty()) continue;
 
-            for (Course course : student.getCourses()) {
+            for (Course_v1 course : student.getCourses()) {
                 if (course.getSubjects().isEmpty()) {
                     // Add a record with no subject details
                     result.add(StudentCourseSubject.builder()
@@ -206,7 +206,7 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
                     continue;
                 }
 
-                for (Subject subject : course.getSubjects()) {
+                for (Subject_v1 subject : course.getSubjects()) {
                     StudentCourseSubject dto = StudentCourseSubject.builder()
                             .rollno(student.getRollno())
                             .firstname(student.getFirstname())
@@ -229,9 +229,9 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 	@Deprecated
 	@Override
 	public List<StudentCourseSubject> getStudentsListBySubject(String subject) {
-		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectname(subject);
+		List<Student_v1> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectname(subject);
 		List<StudentCourseSubject> studentCourseSubjectsList = new ArrayList<>();
-		for(Student element : studentsListBySubject) {
+		for(Student_v1 element : studentsListBySubject) {
 			studentCourseSubjectsList.add(StudentCourseSubject
 					.builder()
 					.firstname(element.getFirstname())
@@ -240,17 +240,17 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 					.rollno(element.getRollno())
 					.coursename(element.getCourses()
 							.stream()
-							.map(Course::getCoursename)
+							.map(Course_v1::getCoursename)
 							.collect(Collectors.joining(" ")))
 					.courseno(element.getCourses()
 							.stream()
-							.map(Course::getCourseno)
+							.map(Course_v1::getCourseno)
 							.collect(Collectors.joining(" ")))
 					.subjectno(element.getCourses().stream()
 						    .map(course -> course.getSubjects()
 						    	.stream()
 						    	.filter(subjectNum -> subjectNum.getSubjectname().equalsIgnoreCase(subject))
-						        .map(Subject::getSubjectno)
+						        .map(Subject_v1::getSubjectno)
 						        .collect(Collectors.joining(" ")))
 						    .collect(Collectors.joining(" ")))
 					.build());
@@ -262,9 +262,9 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 	@Deprecated
 	@Override
 	public List<StudentCourseSubject> getStudentsListBySubjectNo(String subjectno) {
-		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectno(subjectno);
+		List<Student_v1> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectno(subjectno);
 		List<StudentCourseSubject> studentCourseSubjectsList = new ArrayList<>();
-		for(Student element : studentsListBySubject) {
+		for(Student_v1 element : studentsListBySubject) {
 			studentCourseSubjectsList.add(StudentCourseSubject
 					.builder()
 					.firstname(element.getFirstname())
@@ -272,11 +272,11 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 					.rollno(element.getRollno())
 					.coursename(element.getCourses()
 							.stream()
-							.map(Course::getCoursename)
+							.map(Course_v1::getCoursename)
 							.collect(Collectors.joining(" ")))
 					.courseno(element.getCourses()
 							.stream()
-							.map(Course::getCourseno)
+							.map(Course_v1::getCourseno)
 							.collect(Collectors.joining(" ")))
 					.subjectno(subjectno)
 					.build());
@@ -288,10 +288,10 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 //	@Cacheable(value = "subjects")
 	@Override
 	public List<SubjectModel> getSubjectList() {
-		List<Subject> subjectList = subjectRepository.findAll();
+		List<Subject_v1> subjectList = subjectRepository.findAll();
 		System.err.println(subjectList);
 		List<SubjectModel> subjectModelList = new ArrayList<>();
-		for(Subject element : subjectList) {
+		for(Subject_v1 element : subjectList) {
 			subjectModelList.add(SubjectModel
 					.builder()
 					.subjectname(element.getSubjectname())
@@ -304,21 +304,21 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 	
 	@Deprecated
 	@Override
-	public List<Student> getStudentsListEntity() {
-		List<Student> studentsList = studentRepository.findAll();
+	public List<Student_v1> getStudentsListEntity() {
+		List<Student_v1> studentsList = studentRepository.findAll();
 		return studentsList;
 	}
 	
 	@Deprecated
 	@Override
 	public List<StudentCourse> getStudentByRollNo(int rollNo) {
-		Student studentModel = studentRepository.findByRollno(String.valueOf(rollNo));
+		Student_v1 studentModel = studentRepository.findByRollno(String.valueOf(rollNo));
 		System.err.println(studentModel);
 
 		List<StudentCourse> studentCourseList = new ArrayList<>();
-		List<Course> courseList = new ArrayList<>(studentModel.getCourses());
+		List<Course_v1> courseList = new ArrayList<>(studentModel.getCourses());
 		
-		for(Course element : courseList) {
+		for(Course_v1 element : courseList) {
 			if(element.getSubjects().size() == 0) {
 				studentCourseList.add(StudentCourse.builder()
 						.rollno(studentModel.getRollno())
@@ -329,7 +329,7 @@ public class StudentServiceImpl_v1 implements StudentService_v1 {
 						.courseType(element.getCourseType())
 						.build());
 			} else {
-				for(Subject innerElement : element.getSubjects()) {
+				for(Subject_v1 innerElement : element.getSubjects()) {
 					studentCourseList.add(StudentCourse.builder()
 							.rollno(studentModel.getRollno())
 							.firstname(studentModel.getFirstname())

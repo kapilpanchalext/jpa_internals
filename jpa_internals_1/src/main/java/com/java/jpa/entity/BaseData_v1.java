@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @MappedSuperclass
-public class BaseData implements Serializable {
+public class BaseData_v1 implements Serializable {
 	private static final long serialVersionUID = 8883715387022232251L;
 	
 	@Id

@@ -1,6 +1,6 @@
 package com.java.jpa.entity;
 
-public enum Gender {
+public enum Gender_v1 {
 	MALE,
 	FEMALE
 }
