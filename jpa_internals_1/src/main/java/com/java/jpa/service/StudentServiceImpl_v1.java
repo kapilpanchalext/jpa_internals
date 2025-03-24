@@ -22,46 +22,54 @@ import com.java.jpa.repo.SubjectRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+@Deprecated
 @Service
 @RequiredArgsConstructor
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl_v1 implements StudentService_v1 {
 
 	private final StudentRepository studentRepository;	
 	private final CourseRepository courseRepository;
 	private final SubjectRepository subjectRepository;
-
+	
+	@Deprecated
 	@Override
 	public Student saveStudent(Student student) {
 		return studentRepository.save(student);
 	}
-
+	
+	@Deprecated
 	@Override
 	public Course saveCourse(Course course) {
 		return courseRepository.save(course);		
 	}
-
+	
+	@Deprecated
 	@Override
 	public Student findStudentById(String rollno) {
 //		return studentRepository.findByRollno(rollno);
 		return null;
 	}
-
+	
+	@Deprecated
 	@Override
 	public Course findCourseById(String courseno) {
 		return courseRepository.findByCourseno(courseno);
 	}
-
+	
+	@Deprecated
 	@Override
 	public Student findStudentByRollNo(String rollno) {
 		return studentRepository.findByRollno(rollno);
 	}
-
+	
+	@Deprecated
 	@Override
 	public Course findCourseByCourseNo(String courseno) {
 //		return courseRepository.findByCourseno(courseno);
 		return null;
 	}
-
+	
+	@Deprecated
 //	@Cacheable(value = "students")
 	@Override
 	public List<StudentModel> getStudentsList() {
@@ -109,7 +117,8 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return studentModelList;
 	}
-
+	
+	@Deprecated
 //	@Cacheable(value = "courses")
 	@Override
 	public List<CourseModel> getCourseList() {
@@ -140,7 +149,8 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return courseModelList;
 	}
-
+	
+	@Deprecated
 	@Override
 	public Student assignCoursesToStudents(String rollNo, String courseNo) {
 		Student student = studentRepository.findByRollno(rollNo);
@@ -150,12 +160,14 @@ public class StudentServiceImpl implements StudentService {
 		Student savedStudent = studentRepository.save(student);
 		return savedStudent;
 	}
-
+	
+	@Deprecated
 	@Override
 	public Subject saveSubject(Subject subject) {
 		return subjectRepository.save(subject);
 	}
-
+	
+	@Deprecated
 	@Override
 	public Course assignSubjectToCourse(String courseNo, String subjectNo) {
 		Course course = courseRepository.findByCourseno(courseNo);
@@ -166,7 +178,8 @@ public class StudentServiceImpl implements StudentService {
 		Course savedCourse = courseRepository.save(course);
 		return savedCourse;
 	}
-
+	
+	@Deprecated
 	@Transactional
 	@Override
 	public List<StudentCourseSubject> getStudentCourseSubjectMappings() {
@@ -212,7 +225,8 @@ public class StudentServiceImpl implements StudentService {
         }
         return result;
 	}
-
+	
+	@Deprecated
 	@Override
 	public List<StudentCourseSubject> getStudentsListBySubject(String subject) {
 		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectname(subject);
@@ -244,7 +258,8 @@ public class StudentServiceImpl implements StudentService {
 		
 		return studentCourseSubjectsList;
 	}
-
+	
+	@Deprecated
 	@Override
 	public List<StudentCourseSubject> getStudentsListBySubjectNo(String subjectno) {
 		List<Student> studentsListBySubject = studentRepository.findAllByCoursesSubjectsSubjectno(subjectno);
@@ -268,7 +283,8 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return studentCourseSubjectsList;
 	}
-
+	
+	@Deprecated
 //	@Cacheable(value = "subjects")
 	@Override
 	public List<SubjectModel> getSubjectList() {
@@ -285,13 +301,15 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return subjectModelList;
 	}
-
+	
+	@Deprecated
 	@Override
 	public List<Student> getStudentsListEntity() {
 		List<Student> studentsList = studentRepository.findAll();
 		return studentsList;
 	}
-
+	
+	@Deprecated
 	@Override
 	public List<StudentCourse> getStudentByRollNo(int rollNo) {
 		Student studentModel = studentRepository.findByRollno(String.valueOf(rollNo));

@@ -7,12 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.java.jpa.entity.Student;
 
+@Deprecated
 public interface StudentRepository extends JpaRepository<Student, UUID> {
-
+	@Deprecated
 	Student findByRollno(String rollno);
-
+	@Deprecated
 	List<Student> findAllByCoursesSubjectsSubjectname(String subject);
-
+	@Deprecated
 	List<Student> findAllByCoursesSubjectsSubjectno(String subjectno);
 
 }

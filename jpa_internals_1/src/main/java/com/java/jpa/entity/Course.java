@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
+@Deprecated
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,19 +27,24 @@ import lombok.RequiredArgsConstructor;
 @Builder
 public class Course extends BaseData implements Serializable {
 	private static final long serialVersionUID = -331452226800855670L;
-
+	
+	@Deprecated
 	@Column(name = "courseno", unique = true)
 	private String courseno;
-
+	
+	@Deprecated
 	@Column(name = "coursename")
 	private String coursename;
-
+	
+	@Deprecated
 	@Column(name = "course_type")
 	private String courseType;
-
+	
+	@Deprecated
 	@Column(name = "location")
 	private boolean location;
-
+	
+	@Deprecated
 	@EqualsAndHashCode.Exclude
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)

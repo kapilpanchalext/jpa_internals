@@ -8,7 +8,6 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -20,6 +19,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
+@Deprecated
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -30,37 +30,48 @@ import lombok.RequiredArgsConstructor;
 public class Student extends BaseData implements Serializable {
 	private static final long serialVersionUID = 339912208386100188L;
 	
+	@Deprecated
 	@Column(name = "rollno", unique = true, updatable = false)
 	private String rollno;
 	
+	@Deprecated
 	@Column(name = "firstname")
 	private String firstname;
 	
+	@Deprecated
 	@Column(name = "lastname")
 	private String lastname;
 	
+	@Deprecated
 	@Column(name = "dob")
 	private LocalDate dob;
 	
-	@Enumerated(EnumType.STRING)
+	@Deprecated
+	@Enumerated
 	@Column(name = "gender")
 	private Gender gender;
 	
+	@Deprecated
 	@Column(name = "address")
 	private String address;
 	
+	@Deprecated
 	@Column(name = "mobileno")
 	private long mobileNumber;
 	
+	@Deprecated
 	@Column(name = "age")
 	private byte age;
 	
+	@Deprecated
 	@Column(name = "joiningdate")
 	private LocalDate joiningDate;
 	
+	@Deprecated
 	@Column(name = "isStudent")
 	private boolean isStudent;
 	
+	@Deprecated
 	@EqualsAndHashCode.Exclude
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)

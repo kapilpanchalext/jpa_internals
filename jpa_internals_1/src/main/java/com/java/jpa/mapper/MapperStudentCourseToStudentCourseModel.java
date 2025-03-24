@@ -8,6 +8,7 @@ import com.java.jpa.entity.Course;
 import com.java.jpa.entity.Student;
 import com.java.jpa.model.StudentCourse;
 
+@Deprecated
 @Mapper(componentModel = "spring")
 public interface MapperStudentCourseToStudentCourseModel {
 	MapperStudentCourseToStudentCourseModel INSTANCE = Mappers.getMapper(MapperStudentCourseToStudentCourseModel.class);

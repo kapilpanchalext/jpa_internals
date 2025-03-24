@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
+@Deprecated
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -21,12 +22,15 @@ import lombok.RequiredArgsConstructor;
 public class Subject extends BaseData implements Serializable {
 	private static final long serialVersionUID = -1202970504720736463L;
 
+	@Deprecated
 	@Column(name = "subjectno", unique = true)
 	private String subjectno;
-
+	
+	@Deprecated
 	@Column(name = "subject_name")
 	private String subjectname;
-
+	
+	@Deprecated
 	@Column(name = "textbook")
 	private String textBook;	
 }
