@@ -30,7 +30,7 @@ public class Subject_v2 extends BaseData_v1 implements Serializable {
 	@Column(name = "subjectno", unique = true, updatable = false, length = 30)
 	private String subjectno;
 	
-	@Column(name = "subject_name", length = 50)
+	@Column(name = "subjectname", length = 50)
 	private String subjectname;
 	
 	@EqualsAndHashCode.Exclude

@@ -24,9 +24,9 @@ public class TextBook_v1 extends BaseData_v1 implements Serializable {
 	@Column(name = "isbn", unique = true, updatable = false, length = 30)
 	private String isbn;
 	
-	@Column(name = "textbook_name", length = 255)
+	@Column(name = "textbookname", length = 255)
 	private String textbookName;
 	
-	@Column(name = "author_name", length = 100)
+	@Column(name = "authorname", length = 100)
 	private String authorName;
 }

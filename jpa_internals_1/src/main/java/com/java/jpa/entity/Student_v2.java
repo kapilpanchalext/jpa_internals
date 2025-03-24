@@ -46,12 +46,9 @@ public class Student_v2 extends BaseData_v1 implements Serializable {
 	@Column(name = "mobileno")
 	private long mobileNumber;
 	
-	@Column(name = "age")
-	private byte age;
-	
 	@Column(name = "joiningdate")
 	private LocalDate joiningDate;
 	
-	@Column(name = "isStudent")
-	private boolean isStudent;
+	@Column(name = "iscurrent")
+	private boolean isCurrent;
 }

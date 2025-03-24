@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,7 +23,8 @@ public class BaseData_v1 implements Serializable {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
-	@Column(name = "id", updatable = false, nullable = false)
+	@UuidGenerator
+	@Column(name = "id", updatable = false, nullable = false, length = 36)
 	private UUID id;
 	
 	@Column(name = "createdby", length = 50)
