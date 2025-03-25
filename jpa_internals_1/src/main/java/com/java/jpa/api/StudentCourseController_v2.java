@@ -66,6 +66,8 @@ public class StudentCourseController_v2 {
 	@PostMapping(path = "/saveNewCourse")
 	public ResponseEntity<String> saveNewCourse(@RequestBody CourseModel course){
 		service.saveNewCourse(course);
-		return ResponseEntity.status(HttpStatus.OK).body("Course Saved Successfully!");
+		return ResponseEntity
+					.status(HttpStatus.OK)
+					.body("Course Saved Successfully!");
 	}
 }

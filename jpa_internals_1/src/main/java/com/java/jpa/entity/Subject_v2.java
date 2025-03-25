@@ -35,7 +35,7 @@ public class Subject_v2 extends BaseData_v1 implements Serializable {
 	private String subjectname;
 	
 	@Builder.Default
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "subject_textbook", 
         joinColumns = @JoinColumn(name = "subject_id"), 
