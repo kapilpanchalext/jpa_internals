@@ -38,8 +38,8 @@ public class Subject_v2 extends BaseData_v1 implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "subject_textbook", 
-        joinColumns = @JoinColumn(name = "subject_id"), 
-        inverseJoinColumns = @JoinColumn(name = "isbn")
+        joinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "subjectno"), 
+        inverseJoinColumns = @JoinColumn(name = "isbn", referencedColumnName = "isbn")
     )
     private Set<TextBook_v1> textbooks = new HashSet<>();
 }

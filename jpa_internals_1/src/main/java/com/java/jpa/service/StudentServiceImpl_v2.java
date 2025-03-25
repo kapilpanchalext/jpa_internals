@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -26,12 +27,10 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl_v2 implements StudentService_v2 {
-
 	private final StudentRepository_v2 studentRepository;
 	private final CourseRepository_v2 courseRepository;
 	private final SubjectRepository_v2 subjectRepository;
 	private final TextBookRepository_v1 textBookRepository;
-
 
 	@Override
 	public List<StudentModel> getStudentsList() {
@@ -52,7 +51,6 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 					.mobileNumber(element.getMobileNumber())
 					.build());
 		}
-		
 		return studentModelList;
 	}
 
@@ -62,11 +60,52 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 		List<CourseModel> courseModelList = new ArrayList<>();
 		
 		for(Course_v2 element : getAllCoursesList) {
+			Set<Student_v2> studentList = element.getStudents();
+			List<StudentModel> studentModelList = new ArrayList<>();
+			for(Student_v2 innerElement : studentList) {
+				studentModelList.add(StudentModel.builder()
+						.rollno(innerElement.getRollno())
+						.firstname(innerElement.getFirstname())
+						.lastname(innerElement.getLastname())
+						.address(innerElement.getAddress())
+						.dob(innerElement.getDob())
+						.joiningDate(innerElement.getJoiningDate())
+						.gender(innerElement.getGender())
+						.isCurrent(innerElement.isCurrent())
+						.mobileNumber(innerElement.getMobileNumber())
+						.build()
+						);
+			}
+			
+			Set<Subject_v2> subjectsList = element.getSubjects();
+			List<SubjectModel> subjectModelList = new ArrayList<>();
+			for(Subject_v2 innerElement : subjectsList) {
+				
+				Set<TextBook_v1> textbooksList = innerElement.getTextbooks();
+				List<TextBookModel> textbookModelList = new ArrayList<>();
+				
+				for(TextBook_v1 innerInnerElement : textbooksList) {
+					textbookModelList.add(TextBookModel.builder()
+							.isbn(innerInnerElement.getIsbn())
+							.textbookName(innerInnerElement.getTextbookName())
+							.authorName(innerInnerElement.getAuthorName())
+							.build());
+				}
+				
+				subjectModelList.add(SubjectModel.builder()
+						.subjectno(innerElement.getSubjectno())
+						.subjectname(innerElement.getSubjectname())
+						.textBookList(textbookModelList)
+						.build());
+			}
+			
 			courseModelList.add(CourseModel.builder()
 					.courseno(element.getCourseno())
 					.coursename(element.getCoursename())
 					.courseType(element.getCourseType())
 					.location(element.getLocation())
+					.studentsList(studentModelList)
+					.subjectsList(subjectModelList)
 					.build());
 		}
 		return courseModelList;
@@ -103,62 +142,20 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 
 	@Transactional
 	@Override
-	public CourseModel assignCourseToStudent(String courseNo, String rollNo) {
+	public void assignCourseToStudent(String courseNo, String rollNo) {
 		Student_v2 student = studentRepository.findByRollno(rollNo);
 		Course_v2 course = courseRepository.findByCourseno(courseNo);
 		course.getStudents().add(student);
-		
-		Course_v2 savedCourse = courseRepository.save(course);
-		
-		System.err.println(savedCourse);
-		
-		StudentModel studentModelSaved = StudentModel.builder()
-				.firstname(student.getFirstname())
-				.lastname(student.getLastname())
-				.address(student.getAddress())
-				.age((byte)Period.between(student.getDob(), LocalDate.now()).getYears())
-				.dob(student.getDob())
-				.gender(student.getGender())
-				.isCurrent(student.isCurrent())
-				.joiningDate(student.getJoiningDate())
-				.mobileNumber(student.getMobileNumber())
-				.rollno(student.getRollno())
-				.build();
-		
-		CourseModel courseModelSaved = CourseModel.builder()
-				.coursename(savedCourse.getCoursename())
-				.courseno(savedCourse.getCourseno())
-				.courseType(savedCourse.getCourseType())
-				.location(savedCourse.getLocation())
-				.studentsList(List.of(studentModelSaved))
-				.build();
-		
-		return courseModelSaved;
+		courseRepository.save(course);
 	}
 
 	@Transactional
 	@Override
-	public SubjectModel assignTextBookToSubject(String isbn, String subjectNo) {
+	public void assignTextBookToSubject(String isbn, String subjectNo) {
 		Subject_v2 subject = subjectRepository.findBySubjectno(subjectNo);
 		TextBook_v1 textBook = textBookRepository.findByIsbn(isbn);
 		subject.getTextbooks().add(textBook);
-		Subject_v2 mappedSubject = subjectRepository.save(subject);
-		
-		System.err.println(mappedSubject);
-		
-		TextBookModel textBookModel = TextBookModel.builder()
-				.authorName(textBook.getAuthorName())
-				.isbn(textBook.getIsbn())
-				.textbookName(textBook.getTextbookName())
-				.build();
-		
-		SubjectModel savedSubjectModel = SubjectModel.builder()
-				.subjectname(mappedSubject.getSubjectname())
-				.subjectno(mappedSubject.getSubjectno())
-				.textBookList(List.of(textBookModel))
-				.build();
-		
-		return savedSubjectModel;
+		subjectRepository.save(subject);
 	}
 
 	@Transactional
@@ -173,5 +170,14 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 				.build();
 		System.err.println(saveCourse);
 		courseRepository.save(saveCourse);
+	}
+	
+	@Transactional
+	@Override
+	public void assignSubjectToCourse(String courseNo, String subjectNo) {
+		Course_v2 course = courseRepository.findByCourseno(courseNo);
+		Subject_v2 subject = subjectRepository.findBySubjectno(subjectNo);
+		course.getSubjects().add(subject);
+		courseRepository.save(course);
 	}
 }

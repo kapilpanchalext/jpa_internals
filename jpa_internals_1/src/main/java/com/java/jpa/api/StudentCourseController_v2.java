@@ -52,15 +52,21 @@ public class StudentCourseController_v2 {
 	}
 	
 	@PutMapping(path = "/assignCourseToStudent")
-	public ResponseEntity<CourseModel> assignCourseToStudent(@RequestParam String courseNo, @RequestParam String rollNo){
-		CourseModel courseModel = service.assignCourseToStudent(courseNo, rollNo);
-		return ResponseEntity.status(HttpStatus.OK).body(courseModel);
+	public ResponseEntity<String> assignCourseToStudent(@RequestParam String courseNo, @RequestParam String rollNo){
+		service.assignCourseToStudent(courseNo, rollNo);
+		return ResponseEntity.status(HttpStatus.OK).body("Student Assigned to Course Successfully!");
+	}
+	
+	@PutMapping(path = "/assignSubjectToCourse")
+	public ResponseEntity<String> assignSubjectToCourse(@RequestParam String subjectNo, @RequestParam String courseNo){
+		service.assignSubjectToCourse(courseNo, subjectNo);
+		return ResponseEntity.status(HttpStatus.OK).body("Subject Assigned to Course Successfully!");
 	}
 	
 	@PutMapping(path = "/assignTextBookToSubject")
-	public ResponseEntity<SubjectModel> assignTextBookToSubject(@RequestParam String isbn, @RequestParam String subjectNo){
-		SubjectModel subjectModel = service.assignTextBookToSubject(isbn, subjectNo);
-		return ResponseEntity.status(HttpStatus.OK).body(subjectModel);
+	public ResponseEntity<String> assignTextBookToSubject(@RequestParam String isbn, @RequestParam String subjectNo){
+		service.assignTextBookToSubject(isbn, subjectNo);
+		return ResponseEntity.status(HttpStatus.OK).body("TextBook Assigned to Subject Successfully!");
 	}
 	
 	@PostMapping(path = "/saveNewCourse")

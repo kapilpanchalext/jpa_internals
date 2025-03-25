@@ -13,7 +13,8 @@ public interface StudentService_v2 {
 	List<CourseModel> getCoursesList();
 	List<SubjectModel> getSubjectsList();
 	List<TextBookModel> getTextBooksList();
-	CourseModel assignCourseToStudent(String courseNo, String rollNo);
-	SubjectModel assignTextBookToSubject(String isbn, String subjectNo);
+	void assignCourseToStudent(String courseNo, String rollNo);
+	void assignTextBookToSubject(String isbn, String subjectNo);
 	void saveNewCourse(CourseModel course);
+	void assignSubjectToCourse(String courseNo, String subjectNo);
 }
