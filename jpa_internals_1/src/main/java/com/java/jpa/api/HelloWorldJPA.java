@@ -25,7 +25,7 @@ public class HelloWorldJPA {
 					.body("Helloworld from JPA Internals");
 	}
 	
-	@PostMapping(path = "postMessage")
+	@PostMapping(path = "/postMessage")
 	public ResponseEntity<String> sendKafkaMessage(@RequestBody String message){
 		template.send("helloworld-topic1", message);
 		return ResponseEntity.status(HttpStatus.OK).body("Message Sent Successfully!");
