@@ -15,4 +15,5 @@ public interface StudentService_v2 {
 	List<TextBookModel> getTextBooksList();
 	CourseModel assignCourseToStudent(String courseNo, String rollNo);
 	SubjectModel assignTextBookToSubject(String isbn, String subjectNo);
+	void saveNewCourse(CourseModel course);
 }

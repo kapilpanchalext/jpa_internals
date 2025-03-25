@@ -7,6 +7,7 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -34,7 +35,7 @@ public class Subject_v2 extends BaseData_v1 implements Serializable {
 	private String subjectname;
 	
 	@Builder.Default
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(
         name = "subject_textbook", 
         joinColumns = @JoinColumn(name = "subject_id"), 

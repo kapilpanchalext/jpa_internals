@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.java.jpa.api.StudentCourseController_v1;
-import com.java.jpa.api.StudentCourseController_v2;
+
 import com.java.jpa.entity.Course_v2;
 import com.java.jpa.entity.Student_v2;
 import com.java.jpa.entity.Subject_v2;
@@ -160,5 +159,19 @@ public class StudentServiceImpl_v2 implements StudentService_v2 {
 				.build();
 		
 		return savedSubjectModel;
+	}
+
+	@Transactional
+	@Override
+	public void saveNewCourse(CourseModel course) {
+		System.err.println(course);
+		Course_v2 saveCourse = Course_v2.builder()
+				.coursename(course.getCoursename())
+				.courseno(course.getCourseno())
+				.courseType(course.getCourseType())
+				.location(course.getLocation())
+				.build();
+		System.err.println(saveCourse);
+		courseRepository.save(saveCourse);
 	}
 }

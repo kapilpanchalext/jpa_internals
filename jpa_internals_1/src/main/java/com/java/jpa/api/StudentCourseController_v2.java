@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,5 +61,11 @@ public class StudentCourseController_v2 {
 	public ResponseEntity<SubjectModel> assignTextBookToSubject(@RequestParam String isbn, @RequestParam String subjectNo){
 		SubjectModel subjectModel = service.assignTextBookToSubject(isbn, subjectNo);
 		return ResponseEntity.status(HttpStatus.OK).body(subjectModel);
+	}
+	
+	@PostMapping(path = "/saveNewCourse")
+	public ResponseEntity<String> saveNewCourse(@RequestBody CourseModel course){
+		service.saveNewCourse(course);
+		return ResponseEntity.status(HttpStatus.OK).body("Course Saved Successfully!");
 	}
 }

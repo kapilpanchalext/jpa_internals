@@ -1,9 +1,11 @@
 package com.java.jpa.entity;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.Column;
@@ -30,12 +32,14 @@ public class BaseData_v1 implements Serializable {
 	@Column(name = "createdby", length = 50)
 	private String createdBy = "admin";
 	
-	@Column(name = "createdat")
-	private LocalDateTime createdAt = LocalDateTime.now();
+	@Column(name = "createdat", updatable = false)
+	@CreationTimestamp
+	private Instant createdAt;
 	
 	@Column(name = "modifiedby", length = 50)
 	private String modifiedBy = "admin";
 	
 	@Column(name = "modifiedon")
-	private LocalDateTime modifiedOn = LocalDateTime.now();
+	@CreationTimestamp
+	private Instant modifiedOn;
 }
