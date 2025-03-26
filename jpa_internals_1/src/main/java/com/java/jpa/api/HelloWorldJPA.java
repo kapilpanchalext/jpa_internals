@@ -15,12 +15,9 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(path = "/api/v1")
 @RequiredArgsConstructor
 public class HelloWorldJPA {
-	
 	private final KafkaTemplate<String, String> template;
-	
 
 	@GetMapping(path = "/helloworld")
-	
 	public ResponseEntity<String> getHelloWorld(){
 		return ResponseEntity
 					.status(HttpStatus.OK)
@@ -42,7 +39,6 @@ public class HelloWorldJPA {
 			template.send("helloworld-topic1", "This is message no: " + i + " of total messages.");
 			Thread.sleep(1000);
 		}
-		
 		return ResponseEntity
 					.status(HttpStatus.OK)
 					.body("Message Sent Successfully!");
