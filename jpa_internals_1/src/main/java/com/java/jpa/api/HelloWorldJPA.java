@@ -18,14 +18,14 @@ public class HelloWorldJPA {
 	private final KafkaTemplate<String, String> template;
 
 	@GetMapping(path = "/helloworld")
-	public ResponseEntity<String> getHelloWorld(){
+	public ResponseEntity<String> getHelloWorld() {
 		return ResponseEntity
 					.status(HttpStatus.OK)
 					.body("Helloworld from JPA Internals");
 	}
 	
 	@PostMapping(path = "/postMessage")
-	public ResponseEntity<String> sendKafkaMessage(@RequestBody String message){
+	public ResponseEntity<String> sendKafkaMessage(@RequestBody String message) {
 		template.send("helloworld-topic1", message);
 		System.err.println(message);
 		return ResponseEntity
