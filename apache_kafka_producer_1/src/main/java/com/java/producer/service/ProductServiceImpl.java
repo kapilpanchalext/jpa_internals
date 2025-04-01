@@ -50,6 +50,9 @@ public class ProductServiceImpl implements ProductService {
 		LOGGER.info("Partition: " + result.getRecordMetadata().partition());
 		LOGGER.info("Topic: " + result.getRecordMetadata().topic());
 		LOGGER.info("Offset: " + result.getRecordMetadata().offset());
+		LOGGER.info("Key: " + result.getProducerRecord().key());
+		LOGGER.info("Value: " + result.getProducerRecord().value().toString());
+		LOGGER.info("Headers: " + result.getProducerRecord().headers());
 		LOGGER.info("*****Returning product id: " + productId);
 
 //		LOGGER.info("*****Before publishing product created event: " + productId);
