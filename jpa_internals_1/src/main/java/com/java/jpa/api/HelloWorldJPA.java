@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,26 @@ public class HelloWorldJPA {
 			template.send("helloworld-topic1", "This is message no: " + i + " of total messages.");
 			Thread.sleep(1000);
 		}
+		return ResponseEntity
+					.status(HttpStatus.OK)
+					.body("Message Sent Successfully!");
+	}
+	
+	@PostMapping(path = "/keyValue")
+	public ResponseEntity<String> sendKafkaMessageKeyValue(@RequestParam String key, @RequestParam String value) {
+			template.send("helloworld-topic_1", key, value);
+		return ResponseEntity
+					.status(HttpStatus.OK)
+					.body("Message Sent Successfully!");
+	}
+	
+	@PostMapping(path = "/keyValueTest")
+	public ResponseEntity<String> sendKafkaMessageKeyValueTest() {
+		
+		for(int i=0;i<Integer.MAX_VALUE; i++) {
+			template.send("helloworld-topic_1", String.valueOf(i), String.valueOf(i));
+		}
+		
 		return ResponseEntity
 					.status(HttpStatus.OK)
 					.body("Message Sent Successfully!");
