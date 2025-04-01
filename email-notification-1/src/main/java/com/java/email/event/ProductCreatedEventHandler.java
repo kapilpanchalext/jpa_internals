@@ -16,6 +16,6 @@ public class ProductCreatedEventHandler {
 
 	@KafkaHandler()
 	public void handle(ProductCreatedEvent productCreatedEvent) {
-		LOGGER.info("Received a New Event: " + productCreatedEvent.getTitle());
+		LOGGER.info("Received a New Event: " + productCreatedEvent);
 	}
 }
