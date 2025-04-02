@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -27,7 +30,9 @@ public class ProductCreatedEventHandler {
 	private final RestTemplate restTemplate;
 
 	@KafkaHandler
-	public void handle(ProductCreatedEvent productCreatedEvent) {
+	public void handle(@Payload ProductCreatedEvent productCreatedEvent, 
+			@Header(value = "messageId") String messageId, 
+			@Header(KafkaHeaders.RECEIVED_KEY) String messageKey) {
 		String BLUE = "\033[34m";
 		String RESET = "\033[0m";
 		LOGGER.info(BLUE + "Received a New Event: " + productCreatedEvent + RESET);
