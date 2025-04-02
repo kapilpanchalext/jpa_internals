@@ -16,6 +16,8 @@ public class ProductCreatedEventHandler {
 
 	@KafkaHandler
 	public void handle(ProductCreatedEvent productCreatedEvent) {
-		LOGGER.info("Received a New Event: " + productCreatedEvent);
+		String BLUE = "\033[34m";
+		String RESET = "\033[0m";
+		LOGGER.info(BLUE + "Received a New Event: " + productCreatedEvent + RESET);
 	}
 }
