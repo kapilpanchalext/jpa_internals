@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
+	String RED = "\033[31m";
+	String RESET = "\033[0m";
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	private final KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate;
 
@@ -53,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
 		LOGGER.info("Topic: " + result.getRecordMetadata().topic());
 		LOGGER.info("Offset: " + result.getRecordMetadata().offset());
 		LOGGER.info("Key: " + result.getProducerRecord().key());
-		LOGGER.info("Value: " + result.getProducerRecord().value().toString());
+		LOGGER.info(RED + "Value: " + result.getProducerRecord().value().toString() + RESET);
 		LOGGER.info("Headers: " + result.getProducerRecord().headers());
 		LOGGER.info("*****Returning product id: " + productId);
 
