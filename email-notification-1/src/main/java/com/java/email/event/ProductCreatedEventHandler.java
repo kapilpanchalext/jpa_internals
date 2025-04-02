@@ -30,7 +30,8 @@ public class ProductCreatedEventHandler {
 	public void handle(ProductCreatedEvent productCreatedEvent) {
 		String BLUE = "\033[34m";
 		String RESET = "\033[0m";
-
+		LOGGER.info(BLUE + "Received a New Event: " + productCreatedEvent + RESET);
+		
 //		if(true) {
 //			throw new NotRetryableException("An exception occured. No need to consume this message again.");
 //		}
@@ -41,7 +42,6 @@ public class ProductCreatedEventHandler {
 			ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, null, String.class);
 			if(response.getStatusCode().value() == HttpStatus.OK.value()) {
 				LOGGER.info("Received response from a remote Service: " + response.getBody());
-				LOGGER.info(BLUE + "Received a New Event: " + productCreatedEvent + RESET);
 			}
 		} catch (ResourceAccessException e) {
 			LOGGER.error(e.getMessage());
