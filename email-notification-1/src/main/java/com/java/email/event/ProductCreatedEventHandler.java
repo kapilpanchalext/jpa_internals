@@ -35,12 +35,13 @@ public class ProductCreatedEventHandler {
 //			throw new NotRetryableException("An exception occured. No need to consume this message again.");
 //		}
 		
-		String requestUrl = "http://localhost:8082/response/500";
+		String requestUrl = "http://localhost:8082/response/200";
 		
 		try {
 			ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, null, String.class);
 			if(response.getStatusCode().value() == HttpStatus.OK.value()) {
 				LOGGER.info("Received response from a remote Service: " + response.getBody());
+				LOGGER.info(BLUE + "Received a New Event: " + productCreatedEvent + RESET);
 			}
 		} catch (ResourceAccessException e) {
 			LOGGER.error(e.getMessage());
