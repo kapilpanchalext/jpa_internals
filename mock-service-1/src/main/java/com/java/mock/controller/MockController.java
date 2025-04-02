@@ -18,6 +18,13 @@ public class MockController {
 	
 	@GetMapping(path = "/500")
 	public ResponseEntity<String> response500String(){
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(HttpStatusCode.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()).toString());
+		return ResponseEntity
+				.status(HttpStatus.INTERNAL_SERVER_ERROR)
+				.body(HttpStatusCode.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()).toString());
+	}
+	
+	@GetMapping(path = "/")
+	public ResponseEntity<String> responseString(){
+		return ResponseEntity.status(HttpStatus.OK).body("HelloWorld");
 	}
 }

@@ -10,7 +10,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.java.email.exception.NotRetryableException;
@@ -36,7 +35,7 @@ public class ProductCreatedEventHandler {
 //			throw new NotRetryableException("An exception occured. No need to consume this message again.");
 //		}
 		
-		String requestUrl = "http://localhost:8082";
+		String requestUrl = "http://localhost:8082/response/500";
 		
 		try {
 			ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, null, String.class);
