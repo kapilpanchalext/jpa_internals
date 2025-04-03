@@ -17,7 +17,6 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 
 import jakarta.persistence.EntityManagerFactory;
 
-
 @Configuration
 public class KafkaConfig {
 
@@ -27,7 +26,7 @@ public class KafkaConfig {
 	@Value("deposit-money-topic")
 	private String depositTopicName;
 
-	@Value("${spring.kafka.bootstrap-servers}")
+	@Value("${spring.kafka.producer.bootstrap-servers}")
 	private String bootstrapServers;
 
 	@Value("${spring.kafka.producer.key-serializer}")
@@ -71,7 +70,6 @@ public class KafkaConfig {
 		props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, inflightRequests);
 		
 		props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalIdPrefix);
-		props.put(keySerializer, props);
 
 		return props;
 	}
