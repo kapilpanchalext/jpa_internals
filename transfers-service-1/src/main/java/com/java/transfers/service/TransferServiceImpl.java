@@ -32,7 +32,7 @@ public class TransferServiceImpl implements TransferService{
 	private final RestTemplate restTemplate;
 	private final TransferRepository transferRepository;
 
-	@Transactional
+	@Transactional("transactionManager")
 	@Override
 	public boolean transfer(TransferRestModel transferRestModel) {
 		WithdrawalRequestedEvent withdrawalEvent = new WithdrawalRequestedEvent(transferRestModel.getSenderId(),
