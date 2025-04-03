@@ -1,7 +1,10 @@
 package com.java.transfers.service;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -14,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import com.java.transfers.event.DepositRequestedEvent;
 import com.java.transfers.event.WithdrawalRequestedEvent;
 import com.java.transfers.exception.TransferServiceException;
+import com.java.transfers.model.TransferEntity;
 import com.java.transfers.model.TransferRestModel;
+import com.java.transfers.repository.TransferRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +31,7 @@ public class TransferServiceImpl implements TransferService{
 	private final KafkaTemplate<String, Object> kafkaTemplate;
 	private final Environment environment;
 	private final RestTemplate restTemplate;
+	private final TransferRepository transferRepository;
 
 	@Transactional
 	@Override
@@ -34,13 +40,19 @@ public class TransferServiceImpl implements TransferService{
 				transferRestModel.getRecepientId(), transferRestModel.getAmount());
 		DepositRequestedEvent depositEvent = new DepositRequestedEvent(transferRestModel.getSenderId(),
 				transferRestModel.getRecepientId(), transferRestModel.getAmount());
-
+		
+		TransferEntity transferEntity = new TransferEntity();
+		BeanUtils.copyProperties(transferRestModel, transferEntity);
+		transferEntity.setTransferId(UUID.randomUUID().toString());
+		
 		try {
+			transferRepository.save(transferEntity);
+			
 			kafkaTemplate.send(environment.getProperty("withdraw-money-topic", "withdraw-money-topic"),
 					withdrawalEvent);
 			LOGGER.info("Sent event to withdrawal topic.");
 
-			// Business logic that causes and error
+			// Business logic that causes an error
 			callRemoteServce();
 
 			kafkaTemplate.send(environment.getProperty("deposit-money-topic", "deposit-money-topic"), depositEvent);
