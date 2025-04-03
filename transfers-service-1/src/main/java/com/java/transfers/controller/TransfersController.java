@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class TransfersController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-    private TransferService transferService;
+    private final TransferService transferService;
 
     @PostMapping()
     public boolean transfer(@RequestBody TransferRestModel transferRestModel) {

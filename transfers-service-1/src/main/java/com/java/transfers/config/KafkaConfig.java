@@ -24,7 +24,7 @@ public class KafkaConfig {
 	@Value("deposit-money-topic")
 	private String depositTopicName;
 
-	@Value("${spring.kafka.producer.bootstrap-servers}")
+	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServers;
 
 	@Value("${spring.kafka.producer.key-serializer}")
