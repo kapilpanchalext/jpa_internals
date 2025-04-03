@@ -57,6 +57,7 @@ public class KafkaConfig {
 		config.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, requestTimeout);
 		config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, idempotence);
 		config.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, inflightRequests);
+		config.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "transfer-service");
 		//config.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
 
 		return config;

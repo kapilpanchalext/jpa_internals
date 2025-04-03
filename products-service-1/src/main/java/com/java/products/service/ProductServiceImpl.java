@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.java.products.event.ProductCreatedEvent;
 import com.java.products.model.CreateProductRestModel;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -20,6 +21,7 @@ public class ProductServiceImpl implements ProductService{
 	private final KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate;
 	private final Logger LOGGER  = LoggerFactory.getLogger(this.getClass());
 	
+	@Transactional
 	@Override
 	public String createProduct(CreateProductRestModel productRestModel) throws Exception {
 		
