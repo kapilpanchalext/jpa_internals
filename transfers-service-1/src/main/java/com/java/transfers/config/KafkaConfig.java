@@ -68,6 +68,7 @@ public class KafkaConfig {
 		props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, inflightRequests);
 		
 		props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalIdPrefix);
+		props.put(keySerializer, props);
 
 		return props;
 	}
