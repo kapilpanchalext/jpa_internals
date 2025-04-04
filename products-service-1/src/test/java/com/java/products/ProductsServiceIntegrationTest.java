@@ -35,8 +35,6 @@ import com.java.products.event.ProductCreatedEvent;
 import com.java.products.model.CreateProductRestModel;
 import com.java.products.service.ProductService;
 
-import lombok.RequiredArgsConstructor;
-
 @DirtiesContext
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ActiveProfiles(value = "test")
