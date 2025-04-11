@@ -1,0 +1,13 @@
+== Greet Endpoint
+
+=== Request
+include::{snippets}/greet/http-request.adoc[]
+
+=== Path Parameters
+include::{snippets}/greet/path-parameters.adoc[]
+
+=== Response
+include::{snippets}/greet/http-response.adoc[]
+
+=== Response Fields
+include::{snippets}/greet/response-fields.adoc[]

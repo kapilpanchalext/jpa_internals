@@ -1,0 +1,14 @@
+== Curl
+include::{snippets}/home/curl-request.adoc[]
+
+== Request
+include::{snippets}/home/http-request.adoc[]
+
+== Response
+include::{snippets}/home/http-response.adoc[]
+
+== Request Body
+include::{snippets}/home/request-body.adoc[]
+
+== Response Body
+include::{snippets}/home/response-body.adoc[]
